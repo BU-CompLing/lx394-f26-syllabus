@@ -1,0 +1,23 @@
+// ==========================================
+// BU Brand Palette (Scarlet & Black)
+// ==========================================
+// Core Colors
+$bu-red: #cc0000;
+$bu-black:   #2d2926;
+$bu-dark-red: #990000;
+
+$grey-lt-000: #fdfbfb;
+$grey-lt-100: #f8f3f3;
+$grey-lt-200: #eee6e6;
+$grey-lt-300: #e0d4d4;
+
+// Settings
+$color-scheme: red;
+$body-heading-color: $bu-black;
+$body-text-color: $bu-black;
+$link-color: $bu-red;
+$link-active-color: #990000; 
+$sidebar-color: $grey-lt-000;
+$btn-primary-color: $bu-red;
+$feedback-color: darken($sidebar-color, 3%);
+$search-result-preview-color: $grey-dk-100;

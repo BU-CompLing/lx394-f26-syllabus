@@ -1,23 +1,16 @@
 ---
-title: Introduction to Java
+title: Weeks 1–2
 ---
 
-Sep 28
-: [Java & Git](#)
-  : [1.1](#)
+### Corpus Analysis
 
-Sep 29
-: **Section**{: .label .label-purple }[Intro to Java](#)
-  : [Solution](#)
+We learn how to use the [Natural Language Toolkit](https://www.nltk.org/) (NLTK) to compare different _text corpora_ in terms of their statistical characteristics.
 
-Sep 30
-: [Variables & Objects](#)
-  : [1.2](#), [2.1](#)
+Reading
+: <span>Textbook</span>{:.label.label-yellow} [Chapter 1](https://www.nltk.org/book/ch01.html)
 
-Oct 1
-: **Lab**{: .label .label-purple } [Intro to Java](#)
+9/2
+: No lab (first day of class)
 
-Oct 2
-: [Tracing, IntLists, & Recursion](#)
-  : [2.1](#)
-: **HW 1 due**{: .label .label-red }
+9/7
+: <span>Holiday</span>{:.label.label-red} No class (Labor Day)
