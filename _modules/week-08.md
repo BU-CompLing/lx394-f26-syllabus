@@ -7,7 +7,7 @@ title: Weeks 8–10
 We learn our first "real" NLP tasks: _tagging_ and _language modeling_ (also known as _next token prediction_).
 
 Reading
-: <span>Textbook</span>{:.label.label-yellow} [Chapter 5](https://www.nltk.org/book/ch05.html)
+: <span>Textbook</span>{:.label.label-yellow} [Chapter 5]({{ '/book/book_chapter5' | relative_url }})
 
 
 10/26

@@ -7,7 +7,7 @@ title: Weeks 5–7
 We learn how orthographic characters, text documents, and text formatting are represented in computers.
 
 Reading
-: <span>Textbook</span>{:.label.label-yellow} [Chapters 3](https://www.nltk.org/book/ch03.html) and [4](https://www.nltk.org/book/ch04.html)
+: <span>Textbook</span>{:.label.label-yellow} [Chapters 3]({{ '/book/book_chapter3' | relative_url }}) and [4]({{ '/book/book_chapter4' | relative_url }})
 
 
 9/28

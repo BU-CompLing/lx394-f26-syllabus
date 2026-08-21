@@ -1,6 +1,6 @@
 ---
 title: Schedule
-layout: page
+layout: default
 nav_order: 4
 permalink: /schedule
 ---

@@ -1,8 +1,8 @@
 ---
 title: Policies
-layout: page 
+layout: default 
 permalink: /policies
-nav_order: 2
+nav_order: 3
 ---
 
 # Course Policies

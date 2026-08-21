@@ -27,7 +27,16 @@ color_scheme: red
 search_enabled: true
 heading_anchors: true
 permalink: pretty
+math: mathjax
 footer_content:
+
+callouts:
+  warning:
+    title: Warning
+    color: yellow
+  note:
+    title: Note
+    color: blue
 
 # Collections for website data
 collections:
@@ -35,6 +44,7 @@ collections:
   modules:
   schedules:
   announcements:
+
 # Default layouts for each collection type
 defaults:
   - scope:
@@ -61,6 +71,16 @@ defaults:
     values:
       layout: announcement
 
+nav_external_links:
+  - title: Blackboard
+    url: https://learn.bu.edu/ultra/courses/_383306_1/outline
+    hide_icon: false
+  - title: Gradescope (Feedback)
+    url: https://www.gradescope.com/courses/1361731
+    hide_icon: false
+  - title: Piazza (Discussion)
+    url: https://piazza.com/bu/fall2026/lx394694
+    hide_icon: false
 compress_html:
   clippings: all
   comments: all
@@ -72,3 +92,6 @@ compress_html:
 liquid:
   error_mode: strict
   strict_filters: true
+
+kramdown:
+  math_engine: mathjax

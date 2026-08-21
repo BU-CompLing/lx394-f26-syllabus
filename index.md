@@ -64,7 +64,7 @@ TBD, with Sophie<br />
 All course materials will be provided to you for free.
 
 #### Textbook
-[_Natural Language Processing with Python_](https://www.nltk.org/book/) (available online for free)<br />
+[_Natural Language Processing with Python_]({{ '/book' | relative_url }}) (available online for free)<br />
 Steven Bird, Ewan Klein, and Edward Loper
 
 **Do not** purchase the paper edition of the textbook. It is out of date!
@@ -81,9 +81,9 @@ We recommend using [Miniconda](https://www.anaconda.com/docs/getting-started/min
 
 #### Web Apps
 We will be using the following online platforms for this course.
-- [Blackboard](https://learn.bu.edu/ultra/courses/_265208_1/outline): Announcements, readings
-- [Gradescope](https://www.gradescope.com/): Assignment submission, grades, and feedback
-- [Piazza](https://piazza.com/bu/fall2025/lx394/home): Ask and answer questions (access code in Blackboard)
+- [Blackboard](https://learn.bu.edu/ultra/courses/_383306_1/outline): Announcements, readings
+- [Gradescope](https://www.gradescope.com/courses/1361731): Assignment submission, grades, and feedback
+- [Piazza](https://piazza.com/bu/fall2026/lx394694): Ask and answer questions (access code in Blackboard)
 - [Google Colaboratory](https://colab.google/): Create Python notebooks online
 
 ## Prerequisites
