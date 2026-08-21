@@ -50,7 +50,7 @@ by getting the Python interpreter to load the NLTK package,
 then ask to see `nltk.corpus.gutenberg.fileids()`, the file identifiers in
 this corpus:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> import nltk
 >>> nltk.corpus.gutenberg.fileids()
 ['austen-emma.txt', 'austen-persuasion.txt', 'austen-sense.txt', 'bible-kjv.txt',
@@ -64,7 +64,7 @@ this corpus:
 Let's pick out the first of these texts — *Emma* by Jane Austen — and
 give it a short name, `emma`, then find out how many words it contains:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> emma = nltk.corpus.gutenberg.words('austen-emma.txt')
 >>> len(emma)
 192427
@@ -89,7 +89,7 @@ object in NLTK's `corpus` package.
 But since it is cumbersome to type such long names all the time, Python provides
 another version of the `import` statement, as follows:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import gutenberg
 >>> gutenberg.fileids()
 ['austen-emma.txt', 'austen-persuasion.txt', 'austen-sense.txt', ...]
@@ -104,7 +104,7 @@ each number to the nearest integer, using `round()`.
 
 <a id="raw-access"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> for fileid in gutenberg.fileids():
 ...     num_chars = len(gutenberg.raw(fileid))  # [1]
 ...     num_words = len(gutenberg.words(fileid))
@@ -148,7 +148,7 @@ tells us how many *letters* occur in the text, including the spaces between word
 The `sents()` function divides the text up into its sentences, where each sentence is
 a list of words:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> macbeth_sentences = gutenberg.sents('shakespeare-macbeth.txt')
 >>> macbeth_sentences
 [['[', 'The', 'Tragedie', 'of', 'Macbeth', 'by', 'William', 'Shakespeare',
@@ -178,7 +178,7 @@ small collection of web text includes content from a Firefox discussion forum,
 conversations overheard in New York, the movie script of *Pirates of the Carribean*,
 personal advertisements, and wine reviews:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import webtext
 >>> for fileid in webtext.fileids():
 ...     print(fileid, webtext.raw(fileid)[:65], '...')
@@ -201,7 +201,7 @@ generic adults chatroom). The filename contains the date, chatroom,
 and number of posts; e.g., `10-19-20s_706posts.xml` contains 706 posts gathered from
 the 20s chat room on 10/19/2006.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import nps_chat
 >>> chatroom = nps_chat.posts('10-19-20s_706posts.xml')
 >>> chatroom[123]
@@ -243,7 +243,7 @@ have been categorized by genre, such as *news*, *editorial*, and so on.
 We can access the corpus as a list of words, or a list of sentences (where each sentence
 is itself just a list of words). We can optionally specify particular categories or files to read:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import brown
 >>> brown.categories()
 ['adventure', 'belles_lettres', 'editorial', 'fiction', 'government', 'hobbies',
@@ -263,7 +263,7 @@ Let's compare genres in their usage of modal verbs. The first step
 is to produce the counts for a particular genre. Remember to
 `import nltk` before doing the following:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import brown
 >>> news_text = brown.words(categories='news')
 >>> fdist = nltk.FreqDist(w.lower() for w in news_text)
@@ -290,7 +290,7 @@ presented systematically in [2](#sec-conditional-frequency-distributions),
 where we also unpick the following code line by line. For the moment,
 you can ignore the details and just concentrate on the output.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> cfd = nltk.ConditionalFreqDist(
 ...           (genre, word)
 ...           for genre in brown.categories()
@@ -321,7 +321,7 @@ fileid `'test/14826'` is a document drawn from the test set. This split is for
 training and testing algorithms that automatically detect the topic of a document,
 as we will see in [chap-data-intensive](https://www.nltk.org/book/ch06.html#chap-data-intensive).
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import reuters
 >>> reuters.fileids()
 ['test/14826', 'test/14828', 'test/14829', 'test/14832', ...]
@@ -337,7 +337,7 @@ We can ask for the topics covered by one or more documents, or for the
 documents included in one or more categories. For convenience, the
 corpus methods accept a single fileid or a list of fileids.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> reuters.categories('training/9865')
 ['barley', 'corn', 'grain', 'wheat']
 >>> reuters.categories(['training/9865', 'training/9880'])
@@ -353,7 +353,7 @@ Similarly, we can specify the words or sentences we want in terms of
 files or categories. The first handful of words in each of these texts are the
 titles, which by convention are stored as upper case.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> reuters.words('training/9865')[:14]
 ['FRENCH', 'FREE', 'MARKET', 'CEREAL', 'EXPORT', 'BIDS',
 'DETAILED', 'French', 'operators', 'have', 'requested', 'licences', 'to', 'export']
@@ -375,7 +375,7 @@ word in the corpus, counting from the first word of the first address.
 However, the corpus is actually a collection of 55 texts, one for each presidential address.
 An interesting property of this collection is its time dimension:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import inaugural
 >>> inaugural.fileids()
 ['1789-Washington.txt', '1793-Washington.txt', '1797-Adams.txt', ...]
@@ -399,7 +399,7 @@ the output, shown in [1.1](#fig-inaugural2).
 
 <a id="lowercase-startswith"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> cfd = nltk.ConditionalFreqDist(
 ...           (target, fileid[:4])
 ...           for fileid in inaugural.fileids()
@@ -485,7 +485,7 @@ NLTK comes with corpora for many languages, though in some cases
 you will need to learn how to manipulate character encodings in Python
 before using these corpora (see [3.3](https://www.nltk.org/book/ch03.html#sec-unicode)).
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> nltk.corpus.cess_esp.words()
 ['El', 'grupo', 'estatal', 'Electricit\xe9_de_France', ...]
 >>> nltk.corpus.floresta.words()
@@ -509,7 +509,7 @@ for a selection of languages included in the `udhr` corpus.
 The output is shown in [1.2](#fig-word-len-dist) (run the program yourself to see a color plot).
 Note that `True` and `False` are Python's built-in boolean values.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import udhr
 >>> languages = ['Chickasaw', 'English', 'German_Deutsch',
 ...     'Greenlandic_Inuktikut', 'Hungarian_Magyar', 'Ibibio_Efik']
@@ -592,7 +592,7 @@ be used to work with new corpora. [1.3](#tab-corpus) lists functionality
 provided by the corpus readers. We illustrate the difference between some
 of the corpus access methods below:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> raw = gutenberg.raw("burgess-busterbrown.txt")
 >>> raw[1:20]
 'The Adventures of B'
@@ -624,7 +624,7 @@ about regular expressions).
 
 <a id="corpus-root-dict"></a><a id="corpus-reader"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import PlaintextCorpusReader
 >>> corpus_root = '/usr/share/dict'  # [1]
 >>> wordlists = PlaintextCorpusReader(corpus_root, '.*')  # [2]
@@ -642,7 +642,7 @@ that matches the files contained within its subfolders <a href="#file-pattern" i
 
 <a id="corpus-root-treebank"></a><a id="file-pattern"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import BracketParseCorpusReader
 >>> corpus_root = r"C:\corpora\penntreebank\parsed\mrg\wsj"  # [1]
 >>> file_pattern = r".*/wsj_.*\.mrg"  # [2]
@@ -694,7 +694,7 @@ we have to process a sequence of pairs <a href="#seq-pairs" id="ref-seq-pairs"><
 
 <a id="seq-words"></a><a id="seq-pairs"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text = ['The', 'Fulton', 'County', 'Grand', 'Jury', 'said', ...]  # [1]
 >>> pairs = [('news', 'The'), ('news', 'Fulton'), ('news', 'County'), ...]  # [2]
 ```
@@ -711,7 +711,7 @@ Brown Corpus, and for each condition we counted words. Whereas
 `FreqDist()` takes a simple list as input, `ConditionalFreqDist()`
 takes a list of pairs.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import brown
 >>> cfd = nltk.ConditionalFreqDist(
 ...           (genre, word)
@@ -725,7 +725,7 @@ producing pairs consisting of the genre and the word <a href="#genre-word-pairs"
 
 <a id="genre-word-pairs"></a><a id="each-genre"></a><a id="each-word"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> genre_word = [(genre, word)  # [1]
 ...               for genre in ['news', 'romance']  # [2]
 ...               for word in brown.words(categories=genre)]  # [3]
@@ -738,7 +738,7 @@ pairs at the beginning of the list `genre_word` will be of the form
 (`'news'`, *word*) <a href="#start-genre" id="ref-start-genre"><span><span>[1]</span></span></a>, while those at the end will be of the form
 (`'romance'`, *word*) <a href="#end-genre" id="ref-end-genre"><span><span>[2]</span></span></a>.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> genre_word[:4]
 [('news', 'The'), ('news', 'Fulton'), ('news', 'County'), ('news', 'Grand')] # [_start-genre]
 >>> genre_word[-4:]
@@ -751,7 +751,7 @@ variable to inspect it <a href="#inspect-cfd" id="ref-inspect-cfd"><span><span>[
 
 <a id="inspect-cfd"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> cfd = nltk.ConditionalFreqDist(genre_word)
 >>> cfd  # [1]
 <ConditionalFreqDist with 2 conditions>
@@ -762,7 +762,7 @@ variable to inspect it <a href="#inspect-cfd" id="ref-inspect-cfd"><span><span>[
 Let's access the two conditions, and satisfy ourselves that each is just
 a frequency distribution:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> print(cfd['news'])
 <FreqDist with 14394 samples and 100554 outcomes>
 >>> print(cfd['romance'])
@@ -793,7 +793,7 @@ every instance of a word whose lowercased form starts with *america*
 
 <a id="first-four-chars"></a><a id="america-citizen"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import inaugural
 >>> cfd = nltk.ConditionalFreqDist(
 ...           (target, fileid[:4])  # [1]
@@ -811,7 +811,7 @@ by `'-Latin1'` (the character encoding).
 
 <a id="lang-len-word"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import udhr
 >>> languages = ['Chickasaw', 'English', 'German_Deutsch',
 ...     'Greenlandic_Inuktikut', 'Hungarian_Magyar', 'Ibibio_Efik']
@@ -833,7 +833,7 @@ languages, and for words less than 10 characters long, as shown below.
 We interpret the last cell on the top row to mean that 1,638 words of the
 English text have 9 or fewer letters.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> cfd.tabulate(conditions=['English', 'German_Deutsch'],
 ...              samples=range(10), cumulative=True)
                   0    1    2    3    4    5    6    7    8    9
@@ -870,7 +870,7 @@ words and builds a list of consecutive word pairs.
 Remember that, in order to see the result and not a cryptic
 "generator object", we need to use the `list()` function:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent = ['In', 'the', 'beginning', 'God', 'created', 'the', 'heaven',
 ...   'and', 'the', 'earth', '.']
 >>> list(nltk.bigrams(sent))
@@ -904,7 +904,7 @@ bigrams = nltk.bigrams(text)
 cfd = nltk.ConditionalFreqDist(bigrams)  # [1]
 ```
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> cfd['living']
 FreqDist({'creature': 7, 'thing': 4, 'substance': 2, ',': 1, '.': 1, 'soul': 1})
 >>> generate_model(cfd, 'living')
@@ -966,7 +966,7 @@ go to the `Run` menu, and select the command `Run Module`.
 (We'll learn what modules are shortly.)
 The result in the main IDLE window should look like this:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> ================================ RESTART ================================
 >>>
 Monty Python
@@ -1017,7 +1017,7 @@ function name and any input parameters, followed by the body of the
 function. Here's the function we saw in [1](https://www.nltk.org/book/ch01.html#sec-computing-with-language-texts-and-words)
 (including the `import` statement that is needed for Python 2, in order to make division behave as expected):
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from __future__ import division
 >>> def lexical_diversity(text):
 ...     return len(text) / len(set(text))
@@ -1030,7 +1030,7 @@ Here's an equivalent definition which does the same work
 using multiple lines of code. We'll change the parameter name
 from `text` to `my_text_data` to remind you that this is an arbitrary choice:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> def lexical_diversity(my_text_data):
 ...     word_count = len(my_text_data)
 ...     vocab_size = len(set(my_text_data))
@@ -1044,7 +1044,7 @@ So now we have defined a function with the name `lexical_diversity`. But just
 defining it won't produce any output!
 Functions do nothing until they are "called" (or "invoked"):
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import genesis
 >>> kjv = genesis.words('english-kjv.txt')
 >>> lexical_diversity(kjv)
@@ -1070,7 +1070,7 @@ def plural(word):
         return word + 's'
 ```
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> plural('fairy')
 'fairies'
 >>> plural('woman')
@@ -1101,7 +1101,7 @@ access previously defined functions without making copies.
 To do this, save your function(s) in a file called (say) `text_proc.py`.
 Now, you can access your work simply by importing it from the file:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from text_proc import plural
 >>> plural('wish')
 wishes
@@ -1196,7 +1196,7 @@ want to filter out of a document before further processing. Stopwords
 usually have little lexical content, and their presence in a text fails
 to distinguish it from other texts.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import stopwords
 >>> stopwords.words('english')
 ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', 'your', 'yours',
@@ -1216,7 +1216,7 @@ to distinguish it from other texts.
 Let's define a function to compute what fraction of words in a text are *not* in the
 stopwords list:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> def content_fraction(text):
 ...     stopwords = nltk.corpus.stopwords.words('english')
 ...     content = [w for w in text if w.lower() not in stopwords]
@@ -1251,7 +1251,7 @@ to the frequency of the corresponding letter in the puzzle.
 
 <a id="length-constraint"></a><a id="obligatory-letter"></a><a id="freqdist-compare"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> puzzle_letters = nltk.FreqDist('egivrvonl')
 >>> obligatory = 'r'
 >>> wordlist = nltk.corpus.words.words()
@@ -1267,7 +1267,7 @@ One more wordlist corpus is the Names corpus, containing 8,000 first names categ
 The male and female names are stored in separate files. Let's find names which appear
 in both files, i.e. names that are ambiguous for gender:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> names = nltk.corpus.names
 >>> names.fileids()
 ['female.txt', 'male.txt']
@@ -1284,7 +1284,7 @@ We can see this and some other patterns in the graph in [4.4](#fig-cfd-gender),
 produced by the following code. Remember that `name[-1]` is the last letter
 of `name`.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> cfd = nltk.ConditionalFreqDist(
 ...           (fileid, name[-1])
 ...           for fileid in names.fileids()
@@ -1308,7 +1308,7 @@ plus some properties in each row. NLTK includes the CMU Pronouncing
 Dictionary for US English, which was designed for
 use by speech synthesizers.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> entries = nltk.corpus.cmudict.entries()
 >>> len(entries)
 133737
@@ -1342,7 +1342,7 @@ entry, and `pron` is assigned the second part of the entry:
 
 <a id="word-pron"></a><a id="len-pron-three"></a><a id="tuple-assignment"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> for word, pron in entries:  # [1]
 ...     if len(pron) == 3:  # [2]
 ...         ph1, ph2, ph3 = pron  # [3]
@@ -1363,7 +1363,7 @@ Here's another example of the same `for` statement, this time used inside a list
 comprehension. This program finds all words whose pronunciation ends with a syllable
 sounding like *nicks*. You could use this method to find rhyming words.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> syllable = ['N', 'IH0', 'K', 'S']
 >>> [word for word, pron in entries if pron[-4:] == syllable]
 ["atlantic's", 'audiotronics', 'avionics', 'beatniks', 'calisthenics', 'centronics',
@@ -1376,7 +1376,7 @@ even *ntic's* with a silent *t*, for the word *atlantic's*. Let's look for some 
 mismatches between pronunciation and writing. Can you summarize the purpose of
 the following examples and explain how they work?
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> [w for w, pron in entries if pron[-1] == 'M' and w[-1] == 'n']
 ['autumn', 'column', 'condemn', 'damn', 'goddamn', 'hymn', 'solemn']
 >>> sorted(set(w[:2] for w, pron in entries if pron[0] == 'N' and w[0] != 'n'))
@@ -1388,7 +1388,7 @@ primary stress (`1`), secondary stress (`2`) and no stress (`0`).
 As our final example, we define a function to extract the stress digits
 and then scan our lexicon to find words having a particular stress pattern.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> def stress(pron):
 ...     return [char for phone in pron for char in phone if char.isdigit()]
 >>> [w for w, pron in entries if stress(pron) == ['0', '1', '0', '2', '0']]
@@ -1414,7 +1414,7 @@ and group them according to their first and last sounds <a href="#group-first-la
 
 <a id="group-first-last"></a><a id="p3-words"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> p3 = [(pron[0]+'-'+pron[2], word)  # [1]
 ...       for (word, pron) in entries
 ...       if pron[0] == 'P' and len(pron) == 3]  # [2]
@@ -1444,7 +1444,7 @@ We look up a dictionary by giving its name followed by a <a id="key_index_term">
 
 <a id="dict-key"></a><a id="dict-key-error"></a><a id="dict-assign"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> prondict = nltk.corpus.cmudict.dict()
 >>> prondict['fire']  # [1]
 [['F', 'AY1', 'ER0'], ['F', 'AY1', 'R']]
@@ -1470,7 +1470,7 @@ some lexical property (like nouns), or mapping every word of the text.
 For example, the following text-to-speech function looks up each word
 of the text in the pronunciation dictionary.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text = ['natural', 'language', 'processing']
 >>> [ph for w in text for ph in prondict[w][0]]
 ['N', 'AE1', 'CH', 'ER0', 'AH0', 'L', 'L', 'AE1', 'NG', 'G', 'W', 'AH0', 'JH',
@@ -1483,7 +1483,7 @@ Another example of a tabular lexicon is the <a id="comparative_wordlist_index_te
 NLTK includes so-called <a id="swadesh_wordlists_index_term"></a>Swadesh wordlists, lists of about 200 common words
 in several languages. The languages are identified using an ISO 639 two-letter code.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import swadesh
 >>> swadesh.fileids()
 ['be', 'bg', 'bs', 'ca', 'cs', 'cu', 'de', 'en', 'es', 'fr', 'hr', 'it', 'la', 'mk',
@@ -1498,7 +1498,7 @@ We can access cognate words from multiple languages using the `entries()` method
 specifying a list of languages. With one further step we can convert this into
 a simple dictionary (we'll learn about `dict()` in [3](https://www.nltk.org/book/ch05.html#sec-dictionaries)).
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> fr2en = swadesh.entries(['fr', 'en'])
 >>> fr2en
 [('je', 'I'), ('tu, vous', 'you (singular), thou'), ('il', 'he'), ...]
@@ -1514,7 +1514,7 @@ Let's get the German-English and Spanish-English pairs, convert each to a
 dictionary using `dict()`, then *update* our original `translate` dictionary
 with these additional mappings:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> de2en = swadesh.entries(['de', 'en'])    # German-English
 >>> es2en = swadesh.entries(['es', 'en'])    # Spanish-English
 >>> translate.update(dict(de2en))
@@ -1527,7 +1527,7 @@ with these additional mappings:
 
 We can compare words in various Germanic and Romance languages:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> languages = ['en', 'de', 'nl', 'es', 'fr', 'pt', 'la']
 >>> for i in [139, 140, 141, 142]:
 ...     print(swadesh.entries(languages)[i])
@@ -1553,7 +1553,7 @@ lexical resource cannot be treated as a table or spreadsheet.
 Here is a dictionary for the Rotokas language. We see just the first entry,
 for the word *kaa* meaning "to gag":
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import toolbox
 >>> toolbox.entries('rotokas.dic')
 [('kaa', [('ps', 'V'), ('pt', 'A'), ('ge', 'gag'), ('tkp', 'nek i pas'),
@@ -1606,7 +1606,7 @@ conclude that the words *motorcar* and *automobile* have the
 same meaning, i.e. they are <a id="synonyms_index_term"></a>synonyms. We can explore these
 words with the help of WordNet:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import wordnet as wn
 >>> wn.synsets('motorcar')
 [Synset('car.n.01')]
@@ -1616,7 +1616,7 @@ Thus, *motorcar* has just one possible meaning and it is identified as `car.n.01
 the first noun sense of *car*. The entity `car.n.01` is called a <a id="synset_index_term"></a>synset,
 or "synonym set", a collection of synonymous words (or "lemmas"):
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> wn.synset('car.n.01').lemma_names()
 ['car', 'auto', 'automobile', 'machine', 'motorcar']
 ```
@@ -1626,7 +1626,7 @@ a train carriage, a gondola, or an elevator car. However, we are only interested
 in the single meaning that is common to all words of the above synset. Synsets
 also come with a prose definition and some example sentences:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> wn.synset('car.n.01').definition()
 'a motor vehicle with four wheels; usually propelled by an internal combustion engine'
 >>> wn.synset('car.n.01').examples()
@@ -1645,7 +1645,7 @@ and get the "name" of a lemma <a href="#get-name" id="ref-get-name"><span><span>
 
 <a id="get-lemmas"></a><a id="lookup-lemma"></a><a id="get-synset"></a><a id="get-name"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> wn.synset('car.n.01').lemmas()  # [1]
 [Lemma('car.n.01.car'), Lemma('car.n.01.auto'), Lemma('car.n.01.automobile'),
 Lemma('car.n.01.machine'), Lemma('car.n.01.motorcar')]
@@ -1660,7 +1660,7 @@ Synset('car.n.01')
 Unlike the word *motorcar*, which is unambiguous and has one
 synset, the word *car* is ambiguous, having five synsets:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> wn.synsets('car')
 [Synset('car.n.01'), Synset('car.n.02'), Synset('car.n.03'), Synset('car.n.04'),
 Synset('cable_car.n.01')]
@@ -1677,7 +1677,7 @@ Synset('cable_car.n.01')]
 For convenience, we can access all the lemmas involving the word *car*
 as follows.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> wn.lemmas('car')
 [Lemma('car.n.01.car'), Lemma('car.n.02.car'), Lemma('car.n.03.car'),
 Lemma('car.n.04.car'), Lemma('cable_car.n.01.car')]
@@ -1710,7 +1710,7 @@ For example, given a concept like *motorcar*,
 we can look at the concepts that are more specific;
 the (immediate) <a id="hyponyms_index_term"></a>hyponyms.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> motorcar = wn.synset('car.n.01')
 >>> types_of_motorcar = motorcar.hyponyms()
 >>> types_of_motorcar[0]
@@ -1735,7 +1735,7 @@ have multiple paths, because they can be classified in more than one way.
 There are two paths between `car.n.01` and `entity.n.01` because
 `wheeled_vehicle.n.01` can be classified as both a vehicle and a container.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> motorcar.hypernyms()
 [Synset('motor_vehicle.n.01')]
 >>> paths = motorcar.hypernym_paths()
@@ -1754,7 +1754,7 @@ There are two paths between `car.n.01` and `entity.n.01` because
 We can get the most general hypernyms (or root hypernyms) of
 a synset as follows:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> motorcar.root_hypernyms()
 [Synset('entity.n.01')]
 ```
@@ -1776,7 +1776,7 @@ The *substance* a tree is made of includes *heartwood* and *sapwood*;
 the `substance_meronyms()`.
 A collection of trees forms a *forest*; the `member_holonyms()`:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> wn.synset('tree.n.01').part_meronyms()
 [Synset('burl.n.02'), Synset('crown.n.07'), Synset('limb.n.02'),
 Synset('stump.n.01'), Synset('trunk.n.01')]
@@ -1790,7 +1790,7 @@ To see just how intricate things can get, consider the word *mint*, which
 has several closely-related senses. We can see that `mint.n.04` is part of
 `mint.n.02` and the substance from which `mint.n.05` is made.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> for synset in wn.synsets('mint', wn.NOUN):
 ...     print(synset.name() + ':', synset.definition())
 ...
@@ -1810,7 +1810,7 @@ mint.n.06: a plant where money is coined by authority of the government
 There are also relationships between verbs. For example, the act of *walking* involves the act of *stepping*,
 so walking <a id="entails_index_term"></a>entails stepping. Some verbs have multiple entailments:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> wn.synset('walk.v.01').entailments()
 [Synset('step.v.01')]
 >>> wn.synset('eat.v.01').entailments()
@@ -1821,7 +1821,7 @@ so walking <a id="entails_index_term"></a>entails stepping. Some verbs have mult
 
 Some lexical relationships hold between lemmas, e.g., <a id="antonymy_index_term"></a>antonymy:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> wn.lemma('supply.n.02.supply').antonyms()
 [Lemma('demand.n.02.demand')]
 >>> wn.lemma('rush.v.01.rush').antonyms()
@@ -1852,7 +1852,7 @@ Two synsets linked to the same root may have several hypernyms in common
 If two synsets share a very specific hypernym — one that is low
 down in the hypernym hierarchy — they must be closely related.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> right = wn.synset('right_whale.n.01')
 >>> orca = wn.synset('orca.n.01')
 >>> minke = wn.synset('minke_whale.n.01')
@@ -1872,7 +1872,7 @@ Of course we know that *whale* is very specific (and *baleen whale* even more so
 while *vertebrate* is more general and *entity* is completely general.
 We can quantify this concept of generality by looking up the depth of each synset:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> wn.synset('baleen_whale.n.01').min_depth()
 14
 >>> wn.synset('whale.n.02').min_depth()
@@ -1893,7 +1893,7 @@ to *minke whale*, *orca*, *tortoise*, and *novel*.
 Although the numbers won't mean much, they decrease as
 we move away from the semantic space of sea creatures to inanimate objects.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> right.path_similarity(minke)
 0.25
 >>> right.path_similarity(orca)

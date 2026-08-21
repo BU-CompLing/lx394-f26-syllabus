@@ -79,7 +79,7 @@ The `>>>` prompt indicates that the Python interpreter is now waiting
 for input. When copying examples from this book, don't type
 the "`>>>`" yourself. Now, let's begin by using Python as a calculator:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> 1 + 5 * 2 - 3
 8
 >>>
@@ -99,7 +99,7 @@ Python interpreter, experimenting with various expressions in the language
 to see what they do.
 Now let's try a nonsensical expression to see how the interpreter handles it:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> 1 +
   File "<stdin>", line 1
     1 +
@@ -126,7 +126,7 @@ before, and install the data required for the book by
 typing the following two commands at the Python prompt, then selecting
 the `book` collection as shown in [1.1](#fig-nltk-downloader).
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> import nltk
 >>> nltk.download()
 ```
@@ -157,7 +157,7 @@ command again, together with the output that
 you will see. Take care to get spelling and punctuation right, and
 remember that you don't type the `>>>`.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.book import *
 *** Introductory Examples for the NLTK Book ***
 Loading text1, ..., text9 and sent1, ..., sent9
@@ -178,13 +178,14 @@ text9: The Man Who Was Thursday by G . K . Chesterton 1908
 Any time we want to find out about these texts, we just have
 to enter their names at the Python prompt:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text1
 <Text: Moby Dick by Herman Melville 1851>
 >>> text2
 <Text: Sense and Sensibility by Jane Austen 1811>
 >>>
 ```
+{: .language-python .console }
 
 Now that we can use the Python interpreter, and have some data to work with,
 we're ready to get started.
@@ -197,7 +198,7 @@ with some context. Here we look up the word *monstrous* in *Moby
 Dick* by entering `text1` followed by a period, then the term
 `concordance`, and then placing `"monstrous"` in parentheses:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text1.concordance("monstrous")
 Displaying 11 of 11 matches:
 ong the former , one was of a most monstrous size . ... This came towards us ,
@@ -245,7 +246,7 @@ of contexts? We can find out
 by appending the term `similar` to the name of the text in
 question, then inserting the relevant word in parentheses:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text1.similar("monstrous")
 mean part maddens doleful gamesome subtly uncommon careful untoward
 exasperate loving passing mouldy christian few true mystifying
@@ -266,7 +267,7 @@ contexts that are shared by two or more words, such as *monstrous*
 and *very*. We have to enclose these words by square brackets as
 well as parentheses, and separate them with a comma:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text2.common_contexts(["monstrous", "very"])
 a_pretty is_pretty am_glad be_glad a_lucky
 >>>
@@ -292,7 +293,7 @@ and different texts. Can you predict the
 dispersion of a word before you view it? As before, take
 care to get the quotes, commas, brackets and parentheses exactly right.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text4.dispersion_plot(["citizens", "democracy", "freedom", "duties", "America"])
 >>>
 ```
@@ -319,7 +320,7 @@ styles we have just seen. To do this, we type the name of the text
 followed by the term `generate`. (We need to include the
 parentheses, but there's nothing that goes between them.)
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text3.generate()
 In the beginning of his brother is a hairy man , whose top may reach
 unto heaven ; and ye shall sow the land of Egypt there was no bread in
@@ -349,7 +350,7 @@ in terms of the words and punctuation symbols that appear. We use the
 term `len` to get the length of something, which we'll apply here to the
 book of Genesis:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> len(text3)
 44764
 >>>
@@ -373,7 +374,7 @@ fly past. Now try the following:
 
 <a id="sorted-set"></a><a id="len-set"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sorted(set(text3))  # [1]
 ['!', "'", '(', ')', ',', ',)', '.', '.)', ':', ';', ';)', '?', '?)',
 'A', 'Abel', 'Abelmizraim', 'Abidah', 'Abide', 'Abimael', 'Abimelech',
@@ -403,7 +404,7 @@ distinct words is just 6% of the total number of words, or equivalently
 that each word is used 16 times on average
 (remember if you're using Python 2, to start with `from __future__ import division`).
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> len(set(text3)) / len(text3)
 0.06230453042623537
 >>>
@@ -412,7 +413,7 @@ that each word is used 16 times on average
 Next, let's focus on particular words. We can count how often a word occurs
 in a text, and compute what percentage of the text is taken up by a specific word:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text3.count("smote")
 5
 >>> 100 * text4.count('a') / len(text4)
@@ -440,7 +441,7 @@ next example shows how to define two new functions,
 
 <a id="fun-parameter1"></a><a id="locvar"></a><a id="fun-parameter2"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> def lexical_diversity(text):  # [1]
 ...     return len(set(text)) / len(text)  # [2]
 ...
@@ -469,7 +470,7 @@ Once Python knows that `lexical_diversity()` and `percentage()`
 are the names for specific blocks
 of code, we can go ahead and use these functions:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> lexical_diversity(text3)
 0.06230453042623537
 >>> lexical_diversity(text5)
@@ -532,7 +533,7 @@ and so on. However, for our purposes, we will think of a text as nothing
 more than a sequence of words and punctuation. Here's how we represent
 text in Python, in this case the opening sentence of *Moby Dick*:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent1 = ['Call', 'me', 'Ishmael', '.']
 >>>
 ```
@@ -546,7 +547,7 @@ We can even apply our own `lexical_diversity()` function to it <a href="#apply-f
 
 <a id="inspect-var"></a><a id="len-sent"></a><a id="apply-function"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent1  # [1]
 ['Call', 'me', 'Ishmael', '.']
 >>> len(sent1)  # [2]
@@ -563,7 +564,7 @@ here; you can see the rest for yourself using the Python interpreter
 (if you get an error which says that `sent2` is not defined, you
 need to first type `from nltk.book import *`).
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent2
 ['The', 'family', 'of', 'Dashwood', 'had', 'long',
 'been', 'settled', 'in', 'Sussex', '.']
@@ -589,7 +590,7 @@ by everything from the second list:
 
 <a id="list-plus-list"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> ['Monty', 'Python'] + ['and', 'the', 'Holy', 'Grail']  # [1]
 ['Monty', 'Python', 'and', 'the', 'Holy', 'Grail']
 >>>
@@ -603,7 +604,7 @@ by everything from the second list:
 We don't have to literally type the lists either; we can use short
 names that refer to pre-defined lists.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent4 + sent1
 ['Fellow', '-', 'Citizens', 'of', 'the', 'Senate', 'and', 'of', 'the',
 'House', 'of', 'Representatives', ':', 'Call', 'me', 'Ishmael', '.']
@@ -614,7 +615,7 @@ What if we want to add a single item to a list? This is known as <a id="appendin
 When we `append()` to a list, the list itself is updated as a result
 of the operation.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent1.append("Some")
 >>> sent1
 ['Call', 'me', 'Ishmael', '.', 'Some']
@@ -636,7 +637,7 @@ represents this position is the item's <a id="index_index_term"></a>index. We in
 to show us the item that occurs at an index such as `173` in a text
 by writing the name of the text followed by the index inside square brackets:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text4[173]
 'awaken'
 >>>
@@ -645,7 +646,7 @@ by writing the name of the text followed by the index inside square brackets:
 We can do the converse; given a word, find the index of when it first
 occurs:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text4.index('awaken')
 173
 >>>
@@ -657,7 +658,7 @@ Python permits us to access sublists as well, extracting
 manageable pieces of language from large texts, a technique
 known as <a id="slicing_index_term"></a>slicing.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text5[16715:16735]
 ['U86', 'thats', 'why', 'something', 'like', 'gamefly', 'is', 'so', 'good',
 'because', 'you', 'can', 'actually', 'play', 'a', 'full', 'game', 'without',
@@ -672,7 +673,7 @@ known as <a id="slicing_index_term"></a>slicing.
 Indexes have some subtleties, and we'll explore these with
 the help of an artificial sentence:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent = ['word1', 'word2', 'word3', 'word4', 'word5',
 ...         'word6', 'word7', 'word8', 'word9', 'word10']
 >>> sent[0]
@@ -700,7 +701,7 @@ Thus, zero steps forward leaves it at the first element.
 
 Now, if we accidentally use an index that is too large, we get an error:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent[10]
 Traceback (most recent call last):
   File "<stdin>", line 1, in ?
@@ -717,7 +718,7 @@ Let's take a closer look at slicing, using our artificial sentence again.
 Here we verify that the slice `5:8` includes `sent` elements at
 indexes 5, 6, and 7:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent[5:8]
 ['word6', 'word7', 'word8']
 >>> sent[5]
@@ -736,7 +737,7 @@ list <a href="#slice2" id="ref-slice2"><span><span>[1]</span></span></a>, and we
 
 <a id="slice2"></a><a id="slice3"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent[:3]  # [1]
 ['word1', 'word2', 'word3']
 >>> text2[141525:]  # [2]
@@ -757,7 +758,7 @@ generates an error <a href="#list-error" id="ref-list-error"><span><span>[3]</sp
 
 <a id="list-assignment"></a><a id="slice-assignment"></a><a id="list-error"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent[0] = 'First'  # [1]
 >>> sent[9] = 'Last'
 >>> len(sent)
@@ -787,7 +788,7 @@ like this! In general, we can make up names for anything we care
 to calculate. We did this ourselves in the previous sections, e.g.,
 defining a <a id="variable_index_term"></a>variable `sent1`, as follows:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent1 = ['Call', 'me', 'Ishmael', '.']
 >>>
 ```
@@ -803,7 +804,7 @@ The name of the variable can be anything you like, e.g., `my_sent`, `sentence`, 
 It must start with a letter, and can include numbers and underscores.
 Here are some examples of variables and assignments:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> my_sent = ['Bravely', 'bold', 'Sir', 'Robin', ',', 'rode',
 ... 'forth', 'from', 'Camelot', '.']
 >>> noun_phrase = my_sent[1:4]
@@ -834,7 +835,7 @@ a variable name cannot be any of Python's reserved words, such as
 `def`, `if`, `not`,
 and `import`. If you use a reserved word, Python will produce a syntax error:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> not = 'Camelot'           
 File "<stdin>", line 1
     not = 'Camelot'
@@ -846,7 +847,7 @@ SyntaxError: invalid syntax
 We will often use variables to hold intermediate steps of a computation, especially
 when this makes the code easier to follow. Thus `len(set(text1))` could also be written:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> vocab = set(text1)
 >>> vocab_size = len(vocab)
 >>> vocab_size
@@ -874,7 +875,7 @@ index a string <a href="#index-string" id="ref-index-string"><span><span>[2]</sp
 
 <a id="assign-string"></a><a id="index-string"></a><a id="slice-string"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> name = 'Monty'  # [1]
 >>> name[0]  # [2]
 'M'
@@ -885,7 +886,7 @@ index a string <a href="#index-string" id="ref-index-string"><span><span>[2]</sp
 
 We can also perform multiplication and addition with strings:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> name * 2
 'MontyMonty'
 >>> name + '!'
@@ -895,7 +896,7 @@ We can also perform multiplication and addition with strings:
 
 We can join the words of a list to make a single string, or split a string into a list, as follows:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> ' '.join(['Monty', 'Python'])
 'Monty Python'
 >>> 'Monty Python'.split()
@@ -930,7 +931,7 @@ the interpreter to check whether you got it right. If you're not sure how
 to do this task, it would be a good idea to review the previous section
 before continuing further.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> saying = ['After', 'all', 'is', 'said', 'and', 'done',
 ...           'more', 'is', 'said', 'than', 'done']
 >>> tokens = set(saying)
@@ -967,7 +968,7 @@ provides built-in support for them. Let's use a `FreqDist` to find the
 
 <a id="freq-dist-call"></a><a id="freq-dist-inspect"></a><a id="freq-dist-most-common"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> fdist1 = FreqDist(text1)  # [1]
 >>> print(fdist1)  # [2]
 <FreqDist with 19317 samples and 260819 outcomes>
@@ -1051,7 +1052,7 @@ The corresponding Python expression is given in [(1b)](#ex-set-comprehension-pyt
 Observe how similar the two notations are. Let's go one more step and
 write executable Python code:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> V = set(text1)
 >>> long_words = [w for w in V if len(w) > 15]
 >>> sorted(long_words)
@@ -1089,7 +1090,7 @@ frequent short words (e.g., *the*) and infrequent long words
 Here are all words from the chat corpus
 that are longer than seven characters, that occur more than seven times:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> fdist5 = FreqDist(text5)
 >>> sorted(w for w in set(text5) if len(w) > 7 and fdist5[w] > 7)
 ['#14-19teens', '#talkcity_adults', '((((((((((', '........', 'Question',
@@ -1118,7 +1119,7 @@ To get a handle on collocations, we start off by extracting from a text
 a list of word pairs, also known as <a id="bigrams_index_term"></a>bigrams. This is easily
 accomplished with the function `bigrams()`:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> list(bigrams(['more', 'is', 'said', 'than', 'done']))
 [('more', 'is'), ('is', 'said'), ('said', 'than'), ('than', 'done')]
 >>>
@@ -1139,7 +1140,7 @@ bigrams that occur more often than we would expect based on
 the frequency of the individual words. The `collocations()` function
 does this for us. We will see how it works later.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text4.collocations()
 United States; fellow citizens; four years; years ago; Federal
 Government; General Government; American people; Vice President; Old
@@ -1168,7 +1169,7 @@ word in the text:
 
 <a id="word-lengths"></a><a id="freq-word-lengths"></a><a id="freq-word-lengths-size"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> [len(w) for w in text1]  # [1]
 [1, 4, 4, 2, 6, 8, 4, 1, 9, 1, 1, 8, 2, 1, 4, 11, 5, 2, 1, 7, 6, 1, 3, 4, 5, 2, ...]
 >>> fdist = FreqDist(len(w) for w in text1)   # [2]
@@ -1193,7 +1194,7 @@ characters. One might wonder how frequent the different lengths of word are
 (e.g., how many words of length four appear in the text, are there more words of length five
 than length four, etc). We can do this as follows:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> fdist.most_common()
 [(3, 50223), (1, 47933), (4, 42345), (2, 38513), (5, 26597), (6, 17111), (7, 14399),
 (8, 9966), (9, 6428), (10, 3528), (11, 1873), (12, 1053), (13, 567), (14, 177),
@@ -1276,7 +1277,7 @@ line to the next. They all use `sent7`, the first sentence from `text7`
 (*Wall Street Journal*). As before, if you get an error saying that `sent7`
 is undefined, you need to first type: `from nltk.book import *`
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent7
 ['Pierre', 'Vinken', ',', '61', 'years', 'old', ',', 'will', 'join', 'the',
 'board', 'as', 'a', 'nonexecutive', 'director', 'Nov.', '29', '.']
@@ -1322,7 +1323,7 @@ words containing *gnt*;
 words having an initial capital;
 and words consisting entirely of digits.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sorted(w for w in set(text1) if w.endswith('ableness'))
 ['comfortableness', 'honourableness', 'immutableness', 'indispensableness', ...]
 >>> sorted(term for term in set(text4) if 'gnt' in term)
@@ -1346,7 +1347,7 @@ c1 `or` c2.
 > Next, try to make up some conditions of your own.
 {: .note }
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sorted(w for w in set(text7) if '-' in w and 'index' in w)
 >>> sorted(wd for wd in set(text3) if wd.istitle() and len(wd) > 10)
 >>> sorted(w for w in set(sent7) if not w.islower())
@@ -1358,7 +1359,7 @@ c1 `or` c2.
 In [3](#sec-computing-with-language-simple-statistics), we saw some examples of
 counting items other than words. Let's take a closer look at the notation we used:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> [len(w) for w in text1]
 [1, 4, 4, 2, 6, 8, 4, 1, 9, 1, 1, 8, 2, 1, 4, 11, 5, 2, 1, 7, 6, 1, 3, 4, 5, 2, ...]
 >>> [w.upper() for w in text1]
@@ -1383,7 +1384,7 @@ performing the specified operation on the variable.
 
 Let's return to the question of vocabulary size, and apply the same idiom here:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> len(text1)
 260819
 >>> len(set(text1))
@@ -1398,7 +1399,7 @@ in capitalization, we've wiped 2,000 off the vocabulary count! We can go a step 
 and eliminate numbers and punctuation from the vocabulary count by filtering out any
 non-alphabetic items:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> len(set(word.lower() for word in text1 if word.isalpha()))
 16948
 >>>
@@ -1424,7 +1425,7 @@ Remember to indent the `print` statement by typing four spaces.
 
 <a id="blank-line"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> word = 'cat'
 >>> if len(word) < 5:
 ...     print('word length is less than 5')
@@ -1450,7 +1451,7 @@ then the test will no longer be true.
 This time, the body of the `if` statement will not be executed,
 and no message is shown to the user:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> if len(word) >= 5:
 ...   print('word length is greater than or equal to 5')
 ...
@@ -1462,7 +1463,7 @@ because it controls whether the code in the indented block will be run.
 Another control structure is the `for` loop.
 Try the following, and remember to include the colon and the four spaces:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> for word in ['Call', 'me', 'Ishmael', '.']:
 ...     print(word)
 ...
@@ -1491,7 +1492,7 @@ the item only if it ends with the letter *l*. We'll pick another
 name for the variable to demonstrate that Python doesn't
 try to make sense of variable names.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent1 = ['Call', 'me', 'Ishmael', '.']
 >>> for xyzzy in sent1:
 ...     if xyzzy.endswith('l'):
@@ -1515,7 +1516,7 @@ Here we see the `elif` (else if) statement, and
 the `else` statement. Notice that these also have
 colons before the indented code.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> for token in sent1:
 ...     if token.islower():
 ...         print(token, 'is a lowercase word')
@@ -1545,7 +1546,7 @@ then we loop over each item and print it. Notice the
 extra information given in the print statement: end=' '.
 This tells Python to print a space (not the default newline) after each word.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> tricky = sorted(w for w in set(text2) if 'cie' in w or 'cei' in w)
 >>> for word in tricky:
 ...     print(word, end=' ')

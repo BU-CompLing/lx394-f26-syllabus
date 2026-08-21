@@ -40,7 +40,7 @@ in this chapter is on exploiting tags, and tagging text automatically.
 A part-of-speech tagger, or <a id="pos_tagger_index_term"></a>POS-tagger, processes a sequence of words, and attaches a
 part of speech tag to each word (don't forget to `import nltk`):
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text = word_tokenize("And now for something completely different")
 >>> nltk.pos_tag(text)
 [('And', 'CC'), ('now', 'RB'), ('for', 'IN'), ('something', 'NN'),
@@ -63,7 +63,7 @@ Here we see that *and* is `CC`, a coordinating conjunction;
 
 Let's look at another example, this time including some homonyms:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text = word_tokenize("They refuse to permit us to obtain the refuse permit")
 >>> nltk.pos_tag(text)
 [('They', 'PRP'), ('refuse', 'VBP'), ('to', 'TO'), ('permit', 'VB'), ('us', 'PRP'),
@@ -100,7 +100,7 @@ w1w w2,
 then finds all words w' that appear in the same context,
 i.e. w1w'w2.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text = nltk.Text(word.lower() for word in nltk.corpus.brown.words())
 >>> text.similar('woman')
 Building word-context index...
@@ -141,7 +141,7 @@ tuple consisting of the token and the tag.
 We can create one of these special tuples from the standard string
 representation of a tagged token, using the function `str2tuple()`:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> tagged_token = nltk.tag.str2tuple('fly/NN')
 >>> tagged_token
 ('fly', 'NN')
@@ -156,7 +156,7 @@ step is to tokenize the string
 to access the individual `word/tag` strings, and then to convert
 each of these into a tuple (using `str2tuple()`).
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent = '''
 ... The/AT grand/JJ jury/NN commented/VBD on/IN a/AT number/NN of/IN
 ... other/AP topics/NNS ,/, AMONG/IN them/PPO the/AT Atlanta/NP and/CC
@@ -190,7 +190,7 @@ the corpus reader for the Brown Corpus represents the data as shown below.
 Note that part-of-speech tags have been converted to uppercase, since this has
 become standard practice since the Brown Corpus was published.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> nltk.corpus.brown.tagged_words()
 [('The', 'AT'), ('Fulton', 'NP-TL'), ...]
 >>> nltk.corpus.brown.tagged_words(tagset='universal')
@@ -202,7 +202,7 @@ will have a `tagged_words()` method.
 Here are some more examples, again using the output format
 illustrated for the Brown Corpus:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> print(nltk.corpus.nps_chat.tagged_words())
 [('now', 'RB'), ('im', 'PRP'), ('left', 'VBD'), ...]
 >>> nltk.corpus.conll2000.tagged_words()
@@ -217,7 +217,7 @@ mentioned above for documentation.
 Initially we want to avoid the complications of these tagsets,
 so we use a built-in mapping to the "Universal Tagset":
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> nltk.corpus.brown.tagged_words(tagset='universal')
 [('The', 'DET'), ('Fulton', 'NOUN'), ...]
 >>> nltk.corpus.treebank.tagged_words(tagset='universal')
@@ -230,7 +230,7 @@ These usually contain non-ASCII text,
 and Python always displays this in hexadecimal when printing a larger structure
 such as a list.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> nltk.corpus.sinica_treebank.tagged_words()
 [('ä', 'Neu'), ('åæ', 'Nad'), ('åç', 'Nba'), ...]
 >>> nltk.corpus.indian.tagged_words()
@@ -288,7 +288,7 @@ To help us get started, we will be looking at a simplified tagset
 Let's see which of these tags are the most common in the news
 category of the Brown corpus:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import brown
 >>> brown_news_tagged = brown.tagged_words(categories='news', tagset='universal')
 >>> tag_fd = nltk.FreqDist(tag for (word, tag) in brown_news_tagged)
@@ -335,7 +335,7 @@ of bigrams whose members are themselves word-tag pairs such as
 `(('The', 'DET'), ('Fulton', 'NP'))` and `(('Fulton', 'NP'), ('County', 'N'))`.
 Then we construct a `FreqDist` from the tag parts of the bigrams.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> word_tag_pairs = nltk.bigrams(brown_news_tagged)
 >>> noun_preceders = [a[1] for (a, b) in word_tag_pairs if b[1] == 'NOUN']
 >>> fdist = nltk.FreqDist(noun_preceders)
@@ -364,7 +364,7 @@ involving the referents of one or more noun phrases.
 
 What are the most common verbs in news text? Let's sort all the verbs by frequency:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> wsj = nltk.corpus.treebank.tagged_words(tagset='universal')
 >>> word_tag_fd = nltk.FreqDist(wsj)
 >>> [wt[0] for (wt, _) in word_tag_fd.most_common() if wt[1] == 'VERB']
@@ -379,7 +379,7 @@ Since words and tags are paired, we can treat the word as a condition and the ta
 as an event, and initialize a conditional frequency distribution with a list of
 condition-event pairs. This lets us see a frequency-ordered list of tags given a word:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> cfd1 = nltk.ConditionalFreqDist(wsj)
 >>> cfd1['yield'].most_common()
 [('VERB', 28), ('NOUN', 20)]
@@ -391,7 +391,7 @@ We can reverse the order of the pairs, so that the tags are the conditions, and 
 words are the events. Now we can see likely words for a given tag. We
 will do this for the WSJ tagset rather than the universal tagset:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> wsj = nltk.corpus.treebank.tagged_words()
 >>> cfd2 = nltk.ConditionalFreqDist((tag, word) for (word, tag) in wsj)
 >>> list(cfd2['VBN'])
@@ -403,7 +403,7 @@ To clarify the distinction between `VBD` (past tense) and `VBN`
 (past participle), let's find words which can be both `VBD` and
 `VBN`, and see some surrounding text:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> [w for w in cfd1.conditions() if 'VBD' in cfd1[w] and 'VBN' in cfd1[w]]
 ['Asked', 'accelerated', 'accepted', 'accused', 'acquired', 'added', 'adopted', ...]
 >>> idx1 = wsj.index(('kicked', 'VBD'))
@@ -502,7 +502,7 @@ this time exploiting POS tags.
 Suppose we're studying the word *often* and want to see how it is used
 in text. We could ask to see the words that follow *often*
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> brown_learned_text = brown.words(categories='learned')
 >>> sorted(set(b for (a, b) in nltk.bigrams(brown_learned_text) if a == 'often'))
 [',', '.', 'accomplished', 'analytically', 'appear', 'apt', 'associated', 'assuming',
@@ -512,7 +512,7 @@ in text. We could ask to see the words that follow *often*
 However, it's probably more instructive to use the `tagged_words()`
 method to look at the part-of-speech tag of the following words:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> brown_lrnd_tagged = brown.tagged_words(categories='learned', tagset='universal')
 >>> tags = [b[1] for (a, b) in nltk.bigrams(brown_lrnd_tagged) if a[0] == 'often']
 >>> fd = nltk.FreqDist(tags)
@@ -557,7 +557,7 @@ Finally, let's look for words that are highly ambiguous as to their part of spee
 Understanding why such words are tagged as they are in each context can help us clarify
 the distinctions between the tags.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> brown_news_tagged = brown.tagged_words(categories='news', tagset='universal')
 >>> data = nltk.ConditionalFreqDist((word.lower(), tag)
 ...                                 for (word, tag) in brown_news_tagged)
@@ -682,7 +682,7 @@ entries to a dictionary using the familiar square bracket notation:
 
 <a id="pos-colorless"></a><a id="pos-inspect"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> pos = {}
 >>> pos
 {}
@@ -704,7 +704,7 @@ When we inspect the value of `pos` <a href="#pos-inspect" id="ref-pos-inspect"><
 a set of key-value pairs. Once we have populated the dictionary
 in this way, we can employ the keys to retrieve values:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> pos['ideas']
 'N'
 >>> pos['colorless']
@@ -713,7 +713,7 @@ in this way, we can employ the keys to retrieve values:
 
 Of course, we might accidentally use a key that hasn't been assigned a value.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> pos['green']
 Traceback (most recent call last):
   File "<stdin>", line 1, in ?
@@ -738,7 +738,7 @@ or in a `for` loop <a href="#dict-for-loop" id="ref-dict-for-loop"><span><span>[
 
 <a id="dict-to-list"></a><a id="dict-sorted"></a><a id="dict-for-loop"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> list(pos)  # [1]
 ['ideas', 'furiously', 'colorless', 'sleep']
 >>> sorted(pos)  # [2]
@@ -755,7 +755,7 @@ As well as iterating over all keys
 in the dictionary with a `for` loop, we can use the `for` loop
 as we did for printing lists:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> for word in sorted(pos):
 ...     print(word + ":", pos[word])
 ...
@@ -772,7 +772,7 @@ We can even sort tuples <a href="#sort-tuples" id="ref-sort-tuples"><span><span>
 
 <a id="sort-tuples"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> list(pos.keys())
 ['colorless', 'furiously', 'sleep', 'ideas']
 >>> list(pos.values())
@@ -793,7 +793,7 @@ only get one value for each key. Now
 suppose we try to use a dictionary to store the fact that the
 word *sleep* can be used as both a verb and a noun:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> pos['sleep'] = 'V'
 >>> pos['sleep']
 'V'
@@ -816,7 +816,7 @@ which stores multiple pronunciations for a single word.
 We can use the same key-value pair format to create a dictionary. There's
 a couple of ways to do this, and we will normally use the first:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> pos = {'colorless': 'ADJ', 'ideas': 'N', 'sleep': 'V', 'furiously': 'ADV'}
 >>> pos = dict(colorless='ADJ', ideas='N', sleep='V', furiously='ADV')
 ```
@@ -824,7 +824,7 @@ a couple of ways to do this, and we will normally use the first:
 Note that dictionary keys must be immutable types, such as strings and tuples.
 If we try to define a dictionary using a mutable key, we get a `TypeError`:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> pos = {['ideas', 'blogs', 'adventures']: 'N'}
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
@@ -842,7 +842,7 @@ In order to use it, we have to supply a parameter which can be used to
 create the default value, e.g. `int`, `float`, `str`, `list`, `dict`,
 `tuple`.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from collections import defaultdict
 >>> frequency = defaultdict(int)
 >>> frequency['colorless'] = 4
@@ -871,7 +871,7 @@ it is automatically added to the dictionary <a href="#automatically-added" id="r
 
 <a id="default-noun"></a><a id="non-existent"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> pos = defaultdict(lambda: 'NOUN')  # [1]
 >>> pos['colorless'] = 'ADJ'
 >>> pos['blog']  # [2]
@@ -909,7 +909,7 @@ We need to create a default dictionary that maps each word to its replacement.
 The most frequent n words will be mapped to themselves.
 Everything else will be mapped to `UNK`.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> alice = nltk.corpus.gutenberg.words('carroll-alice.txt')
 >>> vocab = nltk.FreqDist(alice)
 >>> v1000 = [word for (word, _) in vocab.most_common(1000)]
@@ -943,7 +943,7 @@ we increment its count using the `+=` operator.
 
 <a id="code-dictionary"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from collections import defaultdict
 >>> counts = defaultdict(int)
 >>> from nltk.corpus import brown
@@ -972,7 +972,7 @@ The second parameter specifies the sort key using a function `itemgetter()`.
 In general, `itemgetter(n)` returns a function that can be called on
 some other sequence object to obtain the nth element, e.g.:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> pair = ('NP', 8336)
 >>> pair[1]
 8336
@@ -995,7 +995,7 @@ There's a second useful programming idiom at the beginning of
 
 Here's another instance of this pattern, where we index words according to their last two letters:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> last_letters = defaultdict(list)
 >>> words = nltk.corpus.words.words('en')
 >>> for word in words:
@@ -1012,7 +1012,7 @@ Here's another instance of this pattern, where we index words according to their
 The following example uses the same pattern to create an anagram dictionary.
 (You might experiment with the third line to get an idea of why this program works.)
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> anagrams = defaultdict(list)
 >>> for word in words:
 ...     key = ''.join(sorted(word))
@@ -1026,7 +1026,7 @@ Since accumulating words like this is such a common task,
 NLTK provides a more convenient way of creating a `defaultdict(list)`,
 in the form of `nltk.Index()`.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> anagrams = nltk.Index((''.join(sorted(w)), w) for w in words)
 >>> anagrams['aeilnrt']
 ['entrail', 'latrine', 'ratline', 'reliant', 'retinal', 'trenail']
@@ -1047,7 +1047,7 @@ how this information can be used by a POS tagger.
 
 <a id="processing-pairs"></a><a id="tag-word-update"></a><a id="compound-key"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> pos = defaultdict(lambda: defaultdict(int))
 >>> brown_news_tagged = brown.tagged_words(categories='news', tagset='universal')
 >>> for ((w1, t1), (w2, t2)) in nltk.bigrams(brown_news_tagged):  # [1]
@@ -1075,7 +1075,7 @@ any key. If `d` is a dictionary and `k` is a key, we type `d[k]` and
 immediately obtain the value. Finding a key given a value is slower and more
 cumbersome:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> counts = defaultdict(int)
 >>> for word in nltk.corpus.gutenberg.words('milton-paradise.txt'):
 ...     counts[word] += 1
@@ -1092,7 +1092,7 @@ pairs in the dictionary, and create a new dictionary of value-key
 pairs. The next example also illustrates another way of initializing a
 dictionary `pos` with key-value pairs.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> pos = {'colorless': 'ADJ', 'ideas': 'N', 'sleep': 'V', 'furiously': 'ADV'}
 >>> pos2 = dict((value, key) for (key, value) in pos.items())
 >>> pos2['N']
@@ -1106,7 +1106,7 @@ technique just shown for reverse lookup will no longer work (why
 not?). Instead, we have to use `append()` to accumulate the words
 for each part-of-speech, as follows:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> pos.update({'cats': 'N', 'scratch': 'V', 'peacefully': 'ADV', 'old': 'ADJ'})
 >>> pos2 = defaultdict(list)
 >>> for key, value in pos.items():
@@ -1120,7 +1120,7 @@ Now we have inverted the `pos` dictionary, and can look up any part-of-speech an
 all words having that part-of-speech. We can do the same thing even
 more simply using NLTK's support for indexing as follows:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> pos2 = nltk.Index((value, key) for (key, value) in pos.items())
 >>> pos2['ADV']
 ['peacefully', 'furiously']
@@ -1157,7 +1157,7 @@ on the word and its context within a sentence. For this reason, we will
 be working with data at the level of (tagged) sentences rather than words.
 We'll begin by loading the data we will be using.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import brown
 >>> brown_tagged_sents = brown.tagged_sents(categories='news')
 >>> brown_sents = brown.sents(categories='news')
@@ -1171,7 +1171,7 @@ baseline for tagger performance. In order to get the best result, we
 tag each word with the most likely tag. Let's find out which tag is
 most likely (now using the unsimplified tagset):
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> tags = [tag for (word, tag) in brown.tagged_words(categories='news')]
 >>> nltk.FreqDist(tags).max()
 'NN'
@@ -1179,7 +1179,7 @@ most likely (now using the unsimplified tagset):
 
 Now we can create a tagger that tags everything as `NN`.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> raw = 'I do not like green eggs and ham, I do not like them Sam I am!'
 >>> tokens = nltk.word_tokenize(raw)
 >>> default_tagger = nltk.DefaultTagger('NN')
@@ -1194,7 +1194,7 @@ Unsurprisingly, this method performs rather poorly.
 On a typical corpus, it will tag only about an eighth of the tokens correctly,
 as we see below:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> default_tagger.evaluate(brown_tagged_sents)
 0.13089484257215028
 ```
@@ -1214,7 +1214,7 @@ in *ed* is the past participle of a verb, and any word ending with
 *'s* is a possessive noun. We can express these as a list of
 regular expressions:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> patterns = [
 ...     (r'.*ing$', 'VBG'),                # gerunds
 ...     (r'.*ed$', 'VBD'),                 # simple past
@@ -1231,7 +1231,7 @@ Note that these are processed in order, and the first one that matches is applie
 Now we can set up a tagger and use it to tag a sentence. Now its right about a fifth
 of the time.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> regexp_tagger = nltk.RegexpTagger(patterns)
 >>> regexp_tagger.tag(brown_sents[3])
 [('``', 'NN'), ('Only', 'NN'), ('a', 'NN'), ('relative', 'NN'), ('handful', 'NN'),
@@ -1261,7 +1261,7 @@ Let's find the hundred most frequent words and store their most likely tag.
 We can then use this information as the model for a "lookup tagger"
 (an NLTK `UnigramTagger`):
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> fd = nltk.FreqDist(brown.words(categories='news'))
 >>> cfd = nltk.ConditionalFreqDist(brown.tagged_words(categories='news'))
 >>> most_freq_words = fd.most_common(100)
@@ -1276,7 +1276,7 @@ knowing the tags for the 100 most frequent words enables us to tag a large fract
 tokens correctly (nearly half in fact).
 Let's see what it does on some untagged input text:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent = brown.sents(categories='news')[3]
 >>> baseline_tagger.tag(sent)
 [('``', '``'), ('Only', None), ('a', 'AT'), ('relative', None),
@@ -1301,7 +1301,7 @@ as shown below. Now the lookup tagger will only store word-tag pairs
 for words other than nouns, and whenever it cannot assign a tag to a
 word it will invoke the default tagger.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> baseline_tagger = nltk.UnigramTagger(model=likely_tags,
 ...                                      backoff=nltk.DefaultTagger('NN'))
 ```
@@ -1331,7 +1331,7 @@ def display():
     pylab.show()
 ```
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> display()
 ```
 
@@ -1400,7 +1400,7 @@ except there is a more convenient technique for setting it up,
 called <a id="training_index_term"></a>training. In the following code sample,
 we train a unigram tagger, use it to tag a sentence, then evaluate:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import brown
 >>> brown_tagged_sents = brown.tagged_sents(categories='news')
 >>> brown_sents = brown.sents(categories='news')
@@ -1428,7 +1428,7 @@ and made no attempt to construct a general model would get a perfect score, but 
 be useless for tagging new text. Instead, we should split the data, training on 90% and
 testing on the remaining 10%:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> size = int(len(brown_tagged_sents) * 0.9)
 >>> size
 4160
@@ -1478,7 +1478,7 @@ part-of-speech tag is most likely for each context. Here we see
 a special case of an n-gram tagger, namely a bigram tagger.
 First we train it, then use it to tag untagged sentences:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> bigram_tagger = nltk.BigramTagger(train_sents)
 >>> bigram_tagger.tag(brown_sents[2007])
 [('Various', 'JJ'), ('of', 'IN'), ('the', 'AT'), ('apartments', 'NNS'),
@@ -1503,7 +1503,7 @@ training, but does badly on an unseen sentence. As soon as it encounters a new w
 saw it during training with a `None` tag on the previous word. Consequently, the
 tagger fails to tag the rest of the sentence. Its overall accuracy score is very low:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> bigram_tagger.evaluate(test_sents)
 0.102063...
 ```
@@ -1539,7 +1539,7 @@ a default tagger, as follows:
 Most NLTK taggers permit a backoff-tagger to be specified.
 The backoff-tagger may itself have a backoff tagger:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> t0 = nltk.DefaultTagger('NN')
 >>> t1 = nltk.UnigramTagger(train_sents, backoff=t0)
 >>> t2 = nltk.BigramTagger(train_sents, backoff=t1)
@@ -1584,7 +1584,7 @@ Training a tagger on a large corpus may take a significant time. Instead of trai
 every time we need one, it is convenient to save a trained tagger in a file for later re-use.
 Let's save our tagger `t2` to a file `t2.pkl`.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from pickle import dump
 >>> output = open('t2.pkl', 'wb')
 >>> dump(t2, output, -1)
@@ -1593,7 +1593,7 @@ Let's save our tagger `t2` to a file `t2.pkl`.
 
 Now, in a separate Python process, we can load our saved tagger.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from pickle import load
 >>> input = open('t2.pkl', 'rb')
 >>> tagger = load(input)
@@ -1602,7 +1602,7 @@ Now, in a separate Python process, we can load our saved tagger.
 
 Now let's check that it can be used for tagging.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text = """The board's action shows what free enterprise
 ...     is up against in our complex maze of regulatory laws ."""
 >>> tokens = text.split()
@@ -1619,7 +1619,7 @@ What is the upper limit to the performance of an n-gram tagger?
 Consider the case of a trigram tagger. How many cases of part-of-speech ambiguity does it
 encounter? We can determine the answer to this question empirically:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> cfd = nltk.ConditionalFreqDist(
 ...            ((x[1], y[1], z[0]), z[1])
 ...            for sent in brown_tagged_sents
@@ -1643,7 +1643,7 @@ the data. A convenient way to look at tagging errors is the
 <a id="confusion_matrix_index_term"></a>confusion matrix. It charts expected tags (the gold standard)
 against actual tags generated by a tagger:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> test_tags = [tag for sent in brown.sents(categories='editorial')
 ...                  for (word, tag) in t2.tag(sent)]
 >>> gold_tags = [tag for (word, tag) in brown.tagged_words(categories='editorial')]
@@ -1773,7 +1773,7 @@ rules learned by the Brill tagger.
 
 <a id="code-brill-demo"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.tbl import demo as brill_demo
 >>> brill_demo.demo()
 Training Brill tagger on 80 sentences...

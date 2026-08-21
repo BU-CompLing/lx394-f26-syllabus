@@ -61,7 +61,7 @@ Finnish, French, German, Italian, Portuguese and Spanish (with more than
 Text number 2554 is an English translation of *Crime and Punishment*,
 and we can access it as follows.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from urllib import request
 >>> url = "http://www.gutenberg.org/files/2554/2554-0.txt"
 >>> response = request.urlopen(url)
@@ -97,7 +97,7 @@ words and punctuation, as we saw in [1.](https://www.nltk.org/book/ch01.html#cha
 called <a id="tokenization_index_term"></a>tokenization, and it produces our familiar structure, a list of words
 and punctuation.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> tokens = word_tokenize(raw)
 >>> type(tokens)
 <class 'list'>
@@ -114,7 +114,7 @@ list, we can carry out all of the other linguistic processing we saw
 in [1.](https://www.nltk.org/book/ch01.html#chap-introduction), along with the regular list operations
 like slicing:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text = nltk.Text(tokens)
 >>> type(text)
 <class 'nltk.text.Text'>
@@ -142,7 +142,7 @@ and the end, before trimming `raw` to be just the content and nothing else:
 
 <a id="raw-slice"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> raw.find("PART I")
 5338
 >>> raw.rfind("End of Project Gutenberg's Crime")
@@ -174,7 +174,7 @@ using `urlopen`. For fun we'll pick a BBC News story
 called *Blondes to die out in 200 years*, an urban legend
 passed along by the BBC as established scientific fact:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> url = "http://news.bbc.co.uk/2/hi/health/2284783.stm"
 >>> html = request.urlopen(url).read().decode('utf8')
 >>> html[:60]
@@ -187,7 +187,7 @@ including meta tags, an image map, JavaScript, forms, and tables.
 To get text out of HTML we will use a Python library called *BeautifulSoup*,
 available from `http://www.crummy.com/software/BeautifulSoup/`:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from bs4 import BeautifulSoup
 >>> raw = BeautifulSoup(html, 'html.parser').get_text()
 >>> tokens = word_tokenize(raw)
@@ -199,7 +199,7 @@ This still contains unwanted material concerning site navigation and related
 stories. With some trial and error you can find the start and end indexes of the
 content and select the tokens of interest, and initialize a text as before.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> tokens = tokens[110:390]
 >>> text = nltk.Text(tokens)
 >>> text.concordance('gene')
@@ -264,7 +264,7 @@ With the help of a Python library called the *Universal Feed Parser*,
 available from `https://pypi.python.org/pypi/feedparser`, we can access the content
 of a blog, as shown below:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> import feedparser
 >>> llog = feedparser.parse("http://languagelog.ldc.upenn.edu/nll/?feed=atom")
 >>> llog['feed']['title']
@@ -294,7 +294,7 @@ In order to read a local file, we need to use Python's built-in `open()` functio
 followed by the `read()` method. Suppose you have a file `document.txt`, you
 can load its contents like this:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> f = open('document.txt')
 >>> raw = f.read()
 ```
@@ -313,7 +313,7 @@ Various things might have gone wrong when you tried this.
 If the interpreter couldn't find your file, you would have seen an
 error like this:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> f = open('document.txt')
 Traceback (most recent call last):
 File "<pyshell#7>", line 1, in -toplevel-
@@ -327,7 +327,7 @@ this will display a list of all the files in the directory where
 IDLE is running. An alternative is to examine the current
 directory from within Python:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> import os
 >>> os.listdir('.')
 ```
@@ -343,7 +343,7 @@ conventions used for marking newlines.
 Assuming that you can open the file, there are several methods for reading it.
 The `read()` method creates a string with the contents of the entire file:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> f.read()
 'Time flies like an arrow.\nFruit flies like a banana.\n'
 ```
@@ -353,7 +353,7 @@ is equivalent to pressing *Enter* on a keyboard and starting a new line.
 
 We can also read a file one line at a time using a `for` loop:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> f = open('document.txt', 'rU')
 >>> for line in f:
 ...     print(line.strip())
@@ -368,7 +368,7 @@ NLTK's corpus files can also be accessed using these methods. We simply
 have to use `nltk.data.find()` to get the filename for any corpus item.
 Then we can open and read it in the way we just demonstrated above:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> path = nltk.data.find('corpora/gutenberg/melville-moby_dick.txt')
 >>> raw = open(path, 'rU').read()
 ```
@@ -395,7 +395,7 @@ to type a line of input, call the Python function `input()`.
 After saving the input to a variable, we can
 manipulate it just as we have done for other strings.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> s = input("Enter some text: ")
 Enter some text: On an exceptionally hot evening early in July
 >>> print("You typed", len(word_tokenize(s)), "words.")
@@ -426,7 +426,7 @@ When we load the contents of a URL or file, and when we strip out HTML markup,
 we are dealing with strings, Python's `<str>` data type.
 (We will learn more about strings in [3.2](#sec-strings)):
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> raw = open('document.txt').read()
 >>> type(raw)
 <class 'str'>
@@ -435,7 +435,7 @@ we are dealing with strings, Python's `<str>` data type.
 When we tokenize a string we produce a list (of words), and this is Python's `<list>`
 type. Normalizing and sorting lists produces other lists:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> tokens = word_tokenize(raw)
 >>> type(tokens)
 <class 'list'>
@@ -450,7 +450,7 @@ type. Normalizing and sorting lists produces other lists:
 The type of an object determines what operations you can perform on it.
 So, for example, we can append to a list but not to a string:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> vocab.append('blog')
 >>> raw.append('blog')
 Traceback (most recent call last):
@@ -461,7 +461,7 @@ AttributeError: 'str' object has no attribute 'append'
 Similarly, we can concatenate strings with strings, and lists with
 lists, but we cannot concatenate strings with lists:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> query = 'Who knows?'
 >>> beatles = ['john', 'paul', 'george', 'ringo']
 >>> query + beatles
@@ -496,7 +496,7 @@ will report a syntax error:
 
 <a id="single-quotes"></a><a id="double-quotes"></a><a id="backslash-escape"></a><a id="unescaped-quote"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> monty = 'Monty Python'  # [1]
 >>> monty
 'Monty Python'
@@ -521,7 +521,7 @@ the interpreter knows that the statement is not complete after the first line.
 
 <a id="string-backslash"></a><a id="string-parentheses"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> couplet = "Shall I compare thee to a Summer's day?"\
 ...           "Thou are more lovely and more temperate:"  # [1]
 >>> print(couplet)
@@ -536,7 +536,7 @@ Unfortunately the above methods do not give us a newline between
 the two lines of the sonnet. Instead, we can use a triple-quoted
 string as follows:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> couplet = """Shall I compare thee to a Summer's day?
 ... Thou are more lovely and more temperate:"""
 >>> print(couplet)
@@ -558,7 +558,7 @@ the words. We can even multiply strings <a href="#string-multiplication" id="ref
 
 <a id="string-concatenation"></a><a id="string-multiplication"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> 'very' + 'very' + 'very'  # [1]
 'veryveryvery'
 >>> 'very' * 3  # [2]
@@ -583,7 +583,7 @@ We've seen that the addition and multiplication operations apply to
 strings, not just numbers. However, note that we cannot use
 subtraction or division with strings:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> 'very' - 'y'
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
@@ -607,7 +607,7 @@ see the result of a calculation, we have just typed the variable name
 into the interpreter. We can also see the contents of a variable
 using the `print` statement:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> print(monty)
 Monty Python
 ```
@@ -622,7 +622,7 @@ quotation characters since there are none inside the string.
 The `print` statement allows us to display more than one item on a line
 in various ways, as shown below:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> grail = 'Holy Grail'
 >>> print(monty + grail)
 Monty PythonHoly Grail
@@ -638,7 +638,7 @@ As we saw in [2](https://www.nltk.org/book/ch01.html#sec-a-closer-look-at-python
 When we index a string, we get one of its characters (or letters). A single character is nothing special — it's just
 a string of length `1`.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> monty[0]
 'M'
 >>> monty[3]
@@ -649,7 +649,7 @@ a string of length `1`.
 
 As with lists, if we try to access an index that is outside of the string we get an error:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> monty[20]
 Traceback (most recent call last):
   File "<stdin>", line 1, in ?
@@ -665,7 +665,7 @@ indexes `5` and `-7` both refer to the same character (a space).
 
 <a id="last-character"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> monty[-1]  # [1]
 'n'
 >>> monty[5]
@@ -678,7 +678,7 @@ We can write `for` loops to iterate over the characters
 in strings. This `print` function includes the optional `end=' '`
 parameter, which is how we tell Python to print a space instead of a newline at the end.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> sent = 'colorless green ideas sleep furiously'
 >>> for char in sent:
 ...     print(char, end=' ')
@@ -689,7 +689,7 @@ c o l o r l e s s   g r e e n   i d e a s   s l e e p   f u r i o u s l y
 We can count individual characters as well. We should ignore the case
 distinction by normalizing everything to lowercase, and filter out non-alphabetic characters:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import gutenberg
 >>> raw = gutenberg.raw('melville-moby_dick.txt')
 >>> fdist = nltk.FreqDist(ch.lower() for ch in raw if ch.isalpha())
@@ -724,7 +724,7 @@ we used for lists (see [3.2](#fig-string-slicing)).
 For example, the following code accesses the substring starting at index `6`,
 up to (but not including) index `10`:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> monty[6:10]
 'Pyth'
 ```
@@ -737,7 +737,7 @@ We can also slice with negative indexes — the same basic rule of starting
 from the start index and stopping one before the end index applies;
 here we stop before the space character.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> monty[-12:-7]
 'Monty'
 ```
@@ -746,7 +746,7 @@ As with list slices, if we omit the first value, the substring begins at the sta
 of the string. If we omit the second value, the substring continues to the end
 of the string:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> monty[:5]
 'Monty'
 >>> monty[6:]
@@ -755,7 +755,7 @@ of the string:
 
 We test if a string contains a particular substring using the `in` operator, as follows:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> phrase = 'And now for something completely different'
 >>> if 'thing' in phrase:
 ...     print('found "thing"')
@@ -764,7 +764,7 @@ found "thing"
 
 We can also find the position of a substring within a string, using `find()`:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> monty.find('Python')
 6
 ```
@@ -807,7 +807,7 @@ Strings and lists are both kinds of <a id="sequence_index_term"></a>sequence. We
 apart by indexing and slicing them, and we can join them together
 by concatenating them. However, we cannot join strings and lists:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> query = 'Who knows?'
 >>> beatles = ['John', 'Paul', 'George', 'Ringo']
 >>> query[2]
@@ -846,7 +846,7 @@ we will usually format them as a string ([3.9](#sec-formatting)).
 Lists and strings do not have exactly the same functionality.
 Lists have the added power that you can change their elements:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> beatles[0] = "John Lennon"
 >>> del beatles[-1]
 >>> beatles
@@ -856,7 +856,7 @@ Lists have the added power that you can change their elements:
 On the other hand if we try to do that with a *string*
 — changing the 0th character in `query` to `'F'` — we get:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> query[0] = 'F'
 Traceback (most recent call last):
   File "<stdin>", line 1, in ?
@@ -928,7 +928,7 @@ a snippet of Polish text (from the Polish Wikipedia; see
 also known as ISO-8859-2. The function `nltk.data.find()` locates the
 file for us.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> path = nltk.data.find('corpora/unicode_samples/polish-lat2.txt')
 ```
 
@@ -939,7 +939,7 @@ specify the encoding of the file being read or written. So let's open
 our Polish file
 with the encoding `'latin2'` and inspect the contents of the file:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> f = open(path, encoding='latin2')
 >>> for line in f:
 ...    line = line.strip()
@@ -957,7 +957,7 @@ to see the underlying numerical values (or "codepoints") of the characters,
 then we can convert all non-ASCII characters into their two-digit `\x`*XX*
 and four-digit `\u`*XXXX* representations:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> f = open(path, encoding='latin2')
 >>> for line in f:
 ...     line = line.strip()
@@ -984,7 +984,7 @@ Arbitrary Unicode characters can be included using the
 `\u`*XXXX* escape sequence.
 We find the integer ordinal of a character using `ord()`. For example:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> ord('ń')
 324
 ```
@@ -992,7 +992,7 @@ We find the integer ordinal of a character using `ord()`. For example:
 The hexadecimal 4 digit notation for 324 is 0144 (type `hex(324)` to discover this),
 and we can define a string with the appropriate escape sequence.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> nacute = '\u0144'
 >>> nacute
 'ń'
@@ -1010,7 +1010,7 @@ and we can define a string with the appropriate escape sequence.
 We can also see how this character is represented as a sequence of bytes inside
 a text file:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> nacute.encode('utf8')
 b'\xc5\x84'
 ```
@@ -1024,7 +1024,7 @@ standard Unicode convention (i.e., prefixing the hex digits with
 
 <a id="unicode-info"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> import unicodedata
 >>> lines = open(path, encoding='latin2').readlines()
 >>> line = lines[2]
@@ -1062,7 +1062,7 @@ module can work with Unicode characters. (We will take a close look at
 the `re` module in the following section. The `\w` matches a "word
 character", cf [3.4](#tab-re-symbols)).
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> line.find('zosta\u0142y')
 54
 >>> line = line.lower()
@@ -1079,7 +1079,7 @@ b'niemc\\xf3w pod koniec ii wojny \\u015bwiatowej na dolny \\u015bl\\u0105sk, zo
 NLTK tokenizers allow Unicode strings as input, and
 correspondingly yield Unicode strings as output.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> word_tokenize(line)
 ['niemców', 'pod', 'koniec', 'ii', 'wojny', 'światowej', 'na', 'dolny', 'śląsk', ',', 'zostały']
 ```
@@ -1129,7 +1129,7 @@ library using: `import re`. We also need a list of words to search;
 we'll use the Words Corpus again ([4](https://www.nltk.org/book/ch02.html#sec-lexical-resources)). We
 will preprocess it to remove any proper names.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> import re
 >>> wordlist = [w for w in nltk.corpus.words.words('en') if w.islower()]
 ```
@@ -1143,7 +1143,7 @@ We need to specify the characters of interest, and use the dollar sign which has
 special behavior in the context of regular expressions in that it matches
 the end of the word:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> [w for w in wordlist if re.search('ed$', w)]
 ['abaissed', 'abandoned', 'abased', 'abashed', 'abatised', 'abed', 'aborted', ...]
 ```
@@ -1153,7 +1153,7 @@ Suppose we have room in a crossword puzzle for an 8-letter word
 with *j* as its third letter and *t* as its sixth letter.
 In place of each blank cell we use a period:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> [w for w in wordlist if re.search('^..j..t..$', w)]
 ['abjectly', 'adjuster', 'dejected', 'dejectly', 'injector', 'majestic', ...]
 ```
@@ -1184,7 +1184,7 @@ the sequence 4653. What other words
 could be produced with the same sequence? Here we use the regular expression
 «`^[ghi][mno][jlk][def]$`»:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> [w for w in wordlist if re.search('^[ghi][mno][jlk][def]$', w)]
 ['gold', 'golf', 'hold', 'hole']
 ```
@@ -1210,7 +1210,7 @@ words.
 Let's explore the `+` symbol a bit further. Notice that it can be applied to
 individual letters, or to bracketed sets of letters:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> chat_words = sorted(set(w for w in nltk.corpus.nps_chat.words()))
 >>> [w for w in chat_words if re.search('^m+i+n+e+$', w)]
 ['miiiiiiiiiiiiinnnnnnnnnnneeeeeeeeee', 'miiiiiinnnnnnnnnneeeeeeee', 'mine',
@@ -1242,7 +1242,7 @@ Here are some more examples of regular expressions being used to find tokens
 that match a particular pattern, illustrating the use of some new symbols:
 `\`, `{}`, `()`, and `|`:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> wsj = sorted(set(nltk.corpus.treebank.words()))
 >>> [w for w in wsj if re.search('^[0-9]+\.[0-9]+$', w)]
 ['0.0085', '0.05', '0.1', '0.16', '0.2', '0.25', '0.28', '0.3', '0.4', '0.5',
@@ -1331,7 +1331,7 @@ The `re.findall()` ("find all") method finds all (non-overlapping)
 matches of the given regular expression. Let's find all the vowels in
 a word, then count them:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> word = 'supercalifragilisticexpialidocious'
 >>> re.findall(r'[aeiou]', word)
 ['u', 'e', 'a', 'i', 'a', 'i', 'i', 'i', 'e', 'i', 'a', 'i', 'o', 'i', 'o', 'u']
@@ -1342,7 +1342,7 @@ a word, then count them:
 Let's look for all sequences of two or more vowels in some text,
 and determine their relative frequency:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> wsj = sorted(set(nltk.corpus.treebank.words()))
 >>> fd = nltk.FreqDist(vs for word in wsj
 ...                       for vs in re.findall(r'[aeiou]{2,}', word))
@@ -1378,7 +1378,7 @@ We use `re.findall()` to extract all the matching
 pieces, and `''.join()` to join them together (see [3.9](#sec-formatting) for
 more about the join operation).
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> regexp = r'^[AEIOUaeiou]+|[AEIOUaeiou]+$|[^AEIOUaeiou]'
 >>> def compress(word):
 ...     pieces = re.findall(regexp, word)
@@ -1399,7 +1399,7 @@ from the words of Rotokas, such as *ka* and *si*. Since each of
 these is a pair, it can be used to initialize a conditional frequency
 distribution. We then tabulate the frequency of each pair:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> rotokas_words = nltk.corpus.toolbox.words('rotokas.dic')
 >>> cvs = [cv for w in rotokas_words for cv in re.findall(r'[ptksvr][aeiou]', w)]
 >>> cfd = nltk.ConditionalFreqDist(cvs)
@@ -1426,7 +1426,7 @@ it would be helpful to have an index, allowing us to quickly find the list of wo
 that contains a given consonant-vowel pair, e.g. `cv_index['su']` should give us
 all words containing *su*. Here's how we can do this:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> cv_word_pairs = [(cv, w) for w in rotokas_words
 ...                          for cv in re.findall(r'[ptksvr][aeiou]', w)]
 >>> cv_index = nltk.Index(cv_word_pairs)
@@ -1458,7 +1458,7 @@ deal with word stems.
 There are various ways we can pull out the stem of a word. Here's a simple-minded
 approach which just strips off anything that looks like a suffix:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> def stem(word):
 ...     for suffix in ['ing', 'ly', 'ed', 'ious', 'ies', 'ive', 'es', 's', 'ment']:
 ...         if word.endswith(suffix):
@@ -1471,7 +1471,7 @@ to see how we can use regular expressions for this task. Our first step is
 to build up a disjunction of all the suffixes. We need to enclose it in parentheses
 in order to limit the scope of the disjunction.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> re.findall(r'^.*(ing|ly|ed|ious|ies|ive|es|s|ment)$', 'processing')
 ['ing']
 ```
@@ -1484,7 +1484,7 @@ we have to add `?:`,
 which is just one of many arcane subtleties of regular expressions.
 Here's the revised version.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> re.findall(r'^.*(?:ing|ly|ed|ious|ies|ive|es|s|ment)$', 'processing')
 ['processing']
 ```
@@ -1492,7 +1492,7 @@ Here's the revised version.
 However, we'd actually like to split the word into stem and suffix.
 So we should just parenthesize both parts of the regular expression:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> re.findall(r'^(.*)(ing|ly|ed|ious|ies|ive|es|s|ment)$', 'processing')
 [('process', 'ing')]
 ```
@@ -1500,7 +1500,7 @@ So we should just parenthesize both parts of the regular expression:
 This looks promising, but still has a problem. Let's look at a different
 word, *processes*:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> re.findall(r'^(.*)(ing|ly|ed|ious|ies|ive|es|s|ment)$', 'processes')
 [('processe', 's')]
 ```
@@ -1511,7 +1511,7 @@ is "greedy" and the `.*` part of the expression tries to consume as much of the 
 as possible. If we use the "non-greedy" version of the star operator, written `*?`,
 we get what we want:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> re.findall(r'^(.*?)(ing|ly|ed|ious|ies|ive|es|s|ment)$', 'processes')
 [('process', 'es')]
 ```
@@ -1519,7 +1519,7 @@ we get what we want:
 This works even when we allow an empty suffix, by making the content of the
 second parentheses optional:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> re.findall(r'^(.*?)(ing|ly|ed|ious|ies|ive|es|s|ment)?$', 'language')
 [('language', '')]
 ```
@@ -1527,7 +1527,7 @@ second parentheses optional:
 This approach still has many problems (can you spot them?) but we will move
 on to define a function to perform stemming, and apply it to a whole text:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> def stem(word):
 ...     regexp = r'^(.*?)(ing|ly|ed|ious|ies|ive|es|s|ment)?$'
 ...     stem, suffix = re.findall(regexp, word)[0]
@@ -1563,7 +1563,7 @@ the letter *l* <a href="#letter-l" id="ref-letter-l"><span><span>[3]</span></spa
 
 <a id="single-token-wildcard"></a><a id="three-word-phrases"></a><a id="letter-l"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import gutenberg, nps_chat
 >>> moby = nltk.Text(gutenberg.words('melville-moby_dick.txt'))
 >>> moby.findall(r"<a> (<.*>) <man>")  # [1]
@@ -1593,7 +1593,7 @@ will go a long way. For instance, searching a large text corpus for
 expressions of the form *x and other ys* allows us to discover
 hypernyms (cf [5](https://www.nltk.org/book/ch02.html#sec-wordnet)):
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from nltk.corpus import brown
 >>> hobbies_learned = nltk.Text(brown.words(categories=['hobbies', 'learned']))
 >>> hobbies_learned.findall(r"<\w*> <and> <other> <\w*s>")
@@ -1643,7 +1643,7 @@ A further step is to make sure that the resulting form is a known word in a dict
 a task known as lemmatization. We discuss each of these in turn. First, we need
 to define the data we will use in this section:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> raw = """DENNIS: Listen, strange women lying in ponds distributing swords
 ... is no basis for a system of government.  Supreme executive power derives from
 ... a mandate from the masses, not from some farcical aquatic ceremony."""
@@ -1659,7 +1659,7 @@ The Porter and Lancaster stemmers follow their own rules for stripping affixes.
 Observe that the Porter stemmer correctly handles the word *lying*
 (mapping it to *lie*), while the Lancaster stemmer does not.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> porter = nltk.PorterStemmer()
 >>> lancaster = nltk.LancasterStemmer()
 >>> [porter.stem(t) for t in tokens]
@@ -1707,7 +1707,7 @@ class IndexedText(object):
         return self._stemmer.stem(word).lower()
 ```
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> porter = nltk.PorterStemmer()
 >>> grail = nltk.corpus.webtext.words('grail.txt')
 >>> text = IndexedText(porter, grail)
@@ -1730,7 +1730,7 @@ The WordNet lemmatizer only removes affixes if the resulting word is in its dict
 This additional checking process makes the lemmatizer slower than the above stemmers.
 Notice that it doesn't handle *lying*, but it converts *women* to *woman*.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> wnl = nltk.WordNetLemmatizer()
 >>> [wnl.lemmatize(t) for t in tokens]
 ['DENNIS', ':', 'Listen', ',', 'strange', 'woman', 'lying', 'in', 'pond',
@@ -1769,7 +1769,7 @@ have much more control over the process.
 The very simplest method for tokenizing text is to split on whitespace.
 Consider the following text from *Alice's Adventures in Wonderland*:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> raw = """'When I'M a Duchess,' she said to herself, (not in a very hopeful tone
 ... though), 'I won't have any pepper in my kitchen AT ALL. Soup does very
 ... well without--Maybe it's always pepper that makes people hot-tempered,'..."""
@@ -1783,7 +1783,7 @@ to match any number of spaces, tabs, or newlines <a href="#split-whitespace" id=
 
 <a id="split-space"></a><a id="split-whitespace"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> re.split(r' ', raw)  # [1]
 ["'When", "I'M", 'a', "Duchess,'", 'she', 'said', 'to', 'herself,', '(not', 'in',
 'a', 'very', 'hopeful', 'tone\nthough),', "'I", "won't", 'have', 'any', 'pepper',
@@ -1816,7 +1816,7 @@ It also defines the complement of this class `\W`, i.e. all characters
 other than letters, digits or underscore. We can use `\W` in a simple
 regular expression to split the input on anything *other* than a word character:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> re.split(r'\W+', raw)
 ['', 'When', 'I', 'M', 'a', 'Duchess', 'she', 'said', 'to', 'herself', 'not', 'in',
 'a', 'very', 'hopeful', 'tone', 'though', 'I', 'won', 't', 'have', 'any', 'pepper',
@@ -1837,7 +1837,7 @@ further word characters. This means that punctuation is grouped with any followi
 letters (e.g. *'s*) but that sequences of two or more punctuation
 characters are separated.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> re.findall(r'\w+|\S\w*', raw)
 ["'When", 'I', "'M", 'a', 'Duchess', ',', "'", 'she', 'said', 'to', 'herself', ',',
 '(not', 'in', 'a', 'very', 'hopeful', 'tone', 'though', ')', ',', "'I", 'won', "'t",
@@ -1854,7 +1854,7 @@ it would match *hot-tempered* and *it's*.
 We'll also add a pattern to match quote characters so these are kept separate
 from the text they enclose.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> print(re.findall(r"\w+(?:[-']\w+)*|'|[-.(]+|\S\w*", raw))
 ["'", 'When', "I'M", 'a', 'Duchess', ',', "'", 'she', 'said', 'to', 'herself', ',',
 '(', 'not', 'in', 'a', 'very', 'hopeful', 'tone', 'though', ')', ',', "'", 'I',
@@ -1894,7 +1894,7 @@ For readability we break up the regular expression over several lines
 and add a comment about each line. The special `(?x)` "verbose flag"
 tells Python to strip out the embedded whitespace and comments.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text = 'That U.S.A. poster-print costs $12.40...'
 >>> pattern = r'''(?x)     # set flag to allow verbose regexps
 ...     (?:[A-Z]\.)+       # abbreviations, e.g. U.S.A.
@@ -1958,7 +1958,7 @@ seen, some corpora already provide access at the sentence level. In
 the following example, we compute the average number of words per
 sentence in the Brown Corpus:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> len(nltk.corpus.brown.words()) / len(nltk.corpus.brown.sents())
 20.250994070456922
 ```
@@ -1970,7 +1970,7 @@ Here is an example of its use in segmenting the text of a novel.
 (Note that if the segmenter's internal data has been updated by the time you read this,
 you will see different output):
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text = nltk.corpus.gutenberg.raw('chesterton-thursday.txt')
 >>> sents = nltk.sent_tokenize(text)
 >>> pprint.pprint(sents[79:89])
@@ -2037,7 +2037,7 @@ Let's assume that the learner is given the utterance breaks,
 since these often correspond to extended pauses. Here is a possible representation,
 including the initial and target segmentations:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text = "doyouseethekittyseethedoggydoyoulikethekittylikethedoggy"
 >>> seg1 = "0000000000000001000000000010000000000000000100000000000"
 >>> seg2 = "0100100100100001001001000010100100010010000100010010000"
@@ -2063,7 +2063,7 @@ def segment(text, segs):
     return words
 ```
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text = "doyouseethekittyseethedoggydoyoulikethekittylikethedoggy"
 >>> seg1 = "0000000000000001000000000010000000000000000100000000000"
 >>> seg2 = "0100100100100001001001000010100100010010000100010010000"
@@ -2115,7 +2115,7 @@ def evaluate(text, segs):
     return text_size + lexicon_size
 ```
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text = "doyouseethekittyseethedoggydoyoulikethekittylikethedoggy"
 >>> seg1 = "0000000000000001000000000010000000000000000100000000000"
 >>> seg2 = "0100100100100001001001000010100100010010000100010010000"
@@ -2166,7 +2166,7 @@ def anneal(text, segs, iterations, cooling_rate):
     return segs
 ```
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> text = "doyouseethekittyseethedoggydoyoulikethekittylikethedoggy"
 >>> seg1 = "0000000000000001000000000010000000000000000100000000000"
 >>> anneal(text, seg1, 5000, 1.2)
@@ -2211,7 +2211,7 @@ When we want to output these to a display or a file, we must convert
 these lists into strings. To do this in Python we use the `join()` method, and specify
 the string to be used as the "glue".
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> silly = ['We', 'called', 'him', 'Tortoise', 'because', 'he', 'taught', 'us', '.']
 >>> ' '.join(silly)
 'We called him Tortoise because he taught us .'
@@ -2232,7 +2232,7 @@ The `join()` method only works on a list of strings — what we have been callin
 
 We have seen that there are two ways to display the contents of an object:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> word = 'cat'
 >>> sentence = """hello
 ... world"""
@@ -2262,7 +2262,7 @@ Formatted output typically contains a combination of variables and
 pre-specified strings, e.g. given a frequency distribution `fdist`
 we could do:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> fdist = nltk.FreqDist(['dog', 'cat', 'dog', 'cat', 'dog', 'snake', 'dog', 'cat'])
 >>> for word in sorted(fdist):
 ...     print(word, '->', fdist[word], end='; ')
@@ -2272,7 +2272,7 @@ cat -> 3; dog -> 4; snake -> 1;
 Print statements that contain alternating variables and constants can be difficult to read and
 maintain. Another solution is to use <a id="string_formatting_index_term"></a>string formatting.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> for word in sorted(fdist):
 ...    print('{}->{};'.format(word, fdist[word]), end=' ')
 cat->3; dog->4; snake->1;
@@ -2282,7 +2282,7 @@ To understand what is going on here, let's test out the
 format string on its own. (By now this will be
 your usual method of exploring new syntax.)
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> '{}->{};'.format ('cat', 3)
 'cat->3;'
 ```
@@ -2298,7 +2298,7 @@ replacement fields is called a <a id="format_string_index_term"></a>format strin
 Let's unpack the above code further, in order to see this
 behavior up close:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> '{}->'.format('cat')
 'cat->'
 >>> '{}'.format(3)
@@ -2310,7 +2310,7 @@ behavior up close:
 We can have any number of placeholders, but the `str.format` method
 must be called with exactly the same number of arguments.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> '{} wants a {} {}'.format ('Lee', 'sandwich', 'for lunch')
 'Lee wants a sandwich for lunch'
 >>> '{} wants a {} {}'.format ('sandwich', 'for lunch')
@@ -2327,7 +2327,7 @@ System Message: ERROR/3 (`ch03.rst2`, line 2262)
 
 Unexpected indentation.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> '{} wants a {}'.format ('Lee', 'sandwich', 'for lunch')
 'Lee wants a sandwich'
 ```
@@ -2338,7 +2338,7 @@ refers to a positional argument of `format()`. Something like
 is equivalent to `'from {0} to {1}'`, but we can use the numbers to get
 non-default orders:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> 'from {1} to {0}'.format('A', 'B')
 'from B to A'
 ```
@@ -2346,7 +2346,7 @@ non-default orders:
 We can also provide the values for the placeholders indirectly. Here's
 an example using a `for` loop:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> template = 'Lee wants a {} right now'
 >>> menu = ['sandwich', 'spam fritter', 'pancake']
 >>> for snack in menu:
@@ -2368,7 +2368,7 @@ but we can precede the width specifier with a `'<'` alignment option to make num
 
 <a id="right-justified"></a><a id="left-justified"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> '{:6}'.format(41)  # [1]
 '    41'
 >>> '{:<6}' .format(41)  # [2]
@@ -2384,7 +2384,7 @@ Unexpected indentation.
 
 <a id="left-justified-str"></a><a id="right-justified-str"></a>
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> '{:6}'.format('dog')  # [1]
 'dog   '
 >>> '{:>6}'.format('dog')  # [2]
@@ -2396,7 +2396,7 @@ of floating point numbers; for example `{:.4f}` indicates that four
 digits should be displayed after the decimal point for a floating
 point number.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> import math
 >>> '{:.4f}'.format(math.pi)
 '3.1416'
@@ -2406,7 +2406,7 @@ The string formatting is smart enough to know that if you include a
 `'%'` in your format specification, then you want to represent the
 value as a percentage; there's no need to multiply by 100.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> count, total = 3205, 9375
 >>> "accuracy for {} words: {:.4%}".format(total, count / total)
 'accuracy for 9375 words: 34.1867%'
@@ -2458,7 +2458,7 @@ Recall from the listing in [3.6](#code-stemmer-indexing) that we used a format s
 `format()`. This allows us to specify the width of a field using a
 variable.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> '{:{width}}'.format('Monty Python', width=15)
 'Monty Python   '
 ```
@@ -2474,7 +2474,7 @@ It is often useful to write output to files as well. The following
 code opens a file `output.txt` for writing, and saves the program
 output to the file.
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> output_file = open('output.txt', 'w')
 >>> words = set(nltk.corpus.genesis.words('english-kjv.txt'))
 >>> for word in sorted(words):
@@ -2485,7 +2485,7 @@ When we write non-text data to a file we must convert it to a string first.
 We can do this conversion using formatting strings, as we saw above.
 Let's write the total number of words to our file:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> len(words)
 2789
 >>> str(len(words))
@@ -2505,7 +2505,7 @@ it will usually be necessary to wrap it so that it can be displayed
 conveniently. Consider the following output, which overflows its line,
 and which uses a complicated `print` statement:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> saying = ['After', 'all', 'is', 'said', 'and', 'done', ',',
 ...           'more', 'is', 'said', 'than', 'done', '.']
 >>> for word in saying:
@@ -2516,7 +2516,7 @@ After (5), all (3), is (2), said (4), and (3), done (4), , (1), more (4), is (2)
 We can take care of line wrapping with the help of Python's `textwrap` module.
 For maximum clarity we will separate each step onto its own line:
 
-```python
+```console?lang=python&prompt=>>>,...
 >>> from textwrap import fill
 >>> pieces = ["{} {}".format(word, len(word)) for word in saying]
 >>> output = ' '.join(pieces)
