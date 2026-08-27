@@ -50,7 +50,7 @@ W 3:35–4:25, with Romi<br />
 M 3:45–4:45, with Romi<br />
 [Linguistics 138M](https://maps.app.goo.gl/5Jg71Ub65Q6t9oBv5), 111 Cummington Mall
 
-TBD, with Sophie<br />
+Th 11:00–12:00, with Sophie, or by appointment<br />
 [Linguistics 138S](https://maps.app.goo.gl/5Jg71Ub65Q6t9oBv5), 111 Cummington Mall
 
 <!-- {% for schedule in site.schedules %}
